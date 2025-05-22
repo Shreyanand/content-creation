@@ -5,13 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Content Creation in the Age of AI & LLMs</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Visualization & Content Choices:
-        - Report Info: Landing page content -> Goal: Inform & Navigate -> Presentation: Text blocks, lists, styled links/buttons to other reports -> Interaction: Clickable links to 'blogs.html' and 'demos.html' -> Justification: Clear, concise presentation for an index page, facilitating navigation to detailed content.
-        - Library/Method: Tailwind CSS for styling. No complex JS needed for this static landing page structure beyond potential future mobile menu if navigation grows.
-        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            background-color: #f9fafb;
+        }
+        .prose h1, .prose h2, .prose h3, .prose h4 {
+            font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-top: 2.2rem;
+            margin-bottom: 1.2rem;
+        }
+        .prose p, .prose ul, .prose ol {
+            margin-bottom: 1.2rem;
+        }
+        .prose ul, .prose ol {
+            padding-left: 1.5rem;
+        }
+        .prose li {
+            margin-bottom: 0.5rem;
+        }
+        .prose a {
+            text-decoration: underline;
+            color: #0d9488;
+        }
+        .prose code {
+            background: #f3f4f6;
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-size: 0.98em;
+        }
+        .prose table {
+            margin-bottom: 2rem;
+        }
+        .prose th, .prose td {
+            padding: 0.75rem 1rem;
+        }
+        @media (min-width: 640px) {
+            .prose {
+                font-size: 1.15rem;
+            }
         }
         .content-section {
             padding-top: 1.5rem; /* Adjusted for landing page sections */

@@ -3,25 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Report: LLMs in Blogging & Research</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Interactive Report: LLMs in Blogging & Research (with References)</title>
+    <script src="https://cdn.tailwindcss.com"></script> 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Visualization & Content Choices:
-        - Report Info: General LLM capabilities & dual nature -> Goal: Inform -> Presentation: Text blocks, lists -> Interaction: Static display -> Justification: Foundational concepts.
-        - Report Info: Evolution of Blogging (Purpose, Creation, Human Value, Reader Strategies, Ethics) -> Goal: Inform, Detail -> Presentation: Text blocks, accordions for lists (e.g., critical reading skills, ethical imperatives) -> Interaction: Click to expand/collapse accordions -> Justification: Manage information density.
-        - Report Info: Table 1 (AI Detection Tools) -> Goal: Compare/Inform -> Presentation: HTML Table embedded in 'Reader Toolkit' subsection -> Interaction: Static, responsive table -> Justification: Clear presentation of tabular data in context.
-        - Report Info: Academic Publishing (LLMs in research, Researcher's role, Quality, Peer Review, Ethics, Guidelines) -> Goal: Inform, Detail -> Presentation: Text blocks, accordions for lists (e.g., risks in peer review, guidelines) -> Interaction: Click to expand/collapse accordions -> Justification: Manage information density.
-        - Report Info: Table 2 (LLM Impact on Academic Workflow) -> Goal: Organize/Inform -> Presentation: HTML Table embedded in 'LLMs in the Lab & Library' subsection -> Interaction: Static, responsive table -> Justification: Clear presentation of tabular data in context.
-        - Report Info: Table 3 (Publisher Guidelines) -> Goal: Compare/Inform -> Presentation: HTML Table embedded in 'Ensuring Research Quality' subsection -> Interaction: Static, responsive table -> Justification: Clear presentation of tabular data in context.
-        - Report Info: Future (AI Literacy, Stakeholder Recommendations) -> Goal: Inform, Detail -> Presentation: Text blocks, accordions for lists -> Interaction: Click to expand/collapse accordions -> Justification: Manage information density.
-        - Library/Method: Vanilla JS for interactions, Tailwind CSS for styling. Chart.js included but not actively used as no primary quantitative data in the report lends itself to meaningful charting beyond what tables provide.
+        - Report Info: Summarized content on LLMs in blogging and research -> Goal: Inform -> Presentation: Text blocks, lists, tables. In-text citations [N] added, linking to #refN_spa in the updated References section where thematic overlaps with software demo report references exist.
+        - Report Info: Table 1 (AI Detection Tools), Table 2 (LLM Impact Workflow), Table 3 (Publisher Guidelines) -> Goal: Compare/Inform -> Presentation: HTML Tables.
+        - Report Info: Reference list -> Goal: Provide detailed sources -> Presentation: Numbered list of 82 detailed references (from software demo report) in 'References' section, linked from in-text citations where applicable.
+        - Library/Method: Vanilla JS for interactions, Tailwind CSS for styling. Chart.js included.
         - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            background-color: #f9fafb; /* Equivalent to bg-stone-100 or bg-gray-50 */
+        }
+        h1, h2, h3, h4 { 
+            font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 700; 
+            letter-spacing: -0.5px;
+            margin-top: 2.2rem;
+            margin-bottom: 1.2rem;
+        }
+        p, ul, ol {
+            margin-bottom: 1.2rem;
+        }
+        ul, ol {
+            padding-left: 1.5rem; 
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        a {
+            text-decoration: underline;
+            color: #0d9488; /* teal-600 */
+        }
+        a.reference-link { 
+            color: #0D9488; /* teal-600 */
+            font-weight: 500; /* font-medium */
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        a.reference-link:hover {
+            text-decoration: underline;
+            color: #047857; /* teal-700 */
+        }
+        code {
+            background: #f3f4f6; /* gray-100 */
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-size: 0.98em;
+        }
+        table {
+            margin-bottom: 2rem;
+        }
+        th, td {
+            padding: 0.75rem 1rem; 
+        }
+        @media (min-width: 640px) {
+            body {
+                font-size: 1.15rem;
+            }
         }
         .content-section {
-            padding-top: 4rem; /* Adjust based on nav height */
+            padding-top: 4rem; 
         }
         .accordion-content {
             max-height: 0;
@@ -29,7 +75,7 @@
             transition: max-height 0.3s ease-out;
         }
         .accordion-button.active + .accordion-content {
-            max-height: 1000px; /* Adjust as needed */
+            max-height: 1000px; 
         }
         .nav-link {
             transition: color 0.3s ease;
@@ -40,15 +86,14 @@
         .table-container {
             overflow-x: auto;
         }
-        /* Chart container styling as per prompt, even if not used */
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 600px; /* Example max-width */
+            max-width: 600px; 
             margin-left: auto;
             margin-right: auto;
-            height: 300px; /* Base height */
-            max-height: 400px; /* Max height */
+            height: 300px; 
+            max-height: 400px; 
         }
         @media (min-width: 768px) {
             .chart-container {
@@ -62,6 +107,13 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        .reference-item {
+            margin-bottom: 0.75rem;
+            padding-left: 0.5rem;
+        }
+        .reference-item strong {
+            color: #065f46; /* teal-800 */
+        }
     </style>
 </head>
 <body class="bg-stone-100 text-stone-800 leading-relaxed">
@@ -70,7 +122,7 @@
         <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
-                    <h1 class="text-xl sm:text-2xl font-bold text-teal-700">LLMs: Content & Research</h1>
+                    <div class="text-xl sm:text-2xl font-bold text-teal-700">LLMs: Content & Research</div>
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
@@ -80,6 +132,7 @@
                         <a href="#academia-llms" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Academia & LLMs</a>
                         <a href="#future-path" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Future Path</a>
                         <a href="#conclusion" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Conclusion</a>
+                        <a href="#references-section" class="nav-link px-3 py-2 rounded-md text-sm font-medium">References</a>
                     </div>
                 </div>
                 <div class="md:hidden">
@@ -102,63 +155,72 @@
                     <a href="#academia-llms" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Academia & LLMs</a>
                     <a href="#future-path" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Future Path</a>
                     <a href="#conclusion" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Conclusion</a>
+                    <a href="#references-section" class="nav-link block px-3 py-2 rounded-md text-base font-medium">References</a>
                 </div>
             </div>
         </nav>
+        <div class="bg-teal-50 border-b border-teal-200 py-3 px-4 flex items-center justify-center">
+            <span class="mr-3 text-teal-800 font-medium">🎧 Listen to the podcast version:</span>
+            <audio controls class="align-middle h-8">
+                <source src="../blogs.wav" type="audio/wav">
+                Your browser does not support the audio element. <a href="../blogs.wav" class="text-teal-700 underline">Download here</a>.
+            </audio>
+        </div>
     </header>
 
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 pt-20">
+        <h1 class="text-4xl font-bold text-teal-700 mt-8 mb-4 text-center">LLMs: Content & Research</h1>
 
         <section id="overview" class="content-section min-h-screen fade-in">
             <h2 class="text-3xl font-bold text-teal-700 mb-6">Navigating Content's New Frontiers</h2>
             <p class="mb-4 text-lg">Welcome to this interactive exploration of "Navigating the New Frontiers of Content: Blogging and Research in the Age of Large Language Models." This application translates the comprehensive report into a dynamic and accessible format. Our goal is to help you understand the profound impact of Large Language Models (LLMs) on how we create, consume, and evaluate content, particularly in the realms of blogging and academic research.</p>
-            <p class="mb-4">The original report delves into the capabilities of LLMs, their dual nature presenting both transformative opportunities and significant challenges, and the evolving landscapes of online publishing and scholarly work. Here, you can navigate through key themes, examine data from the report, and engage with the material in a structured way.</p>
-            <p class="mb-4">Use the navigation bar to jump to specific sections, or scroll to explore the interconnected facets of this technological shift. We'll look at how LLMs are reshaping content creation, the enduring value of human intellect and integrity, and the path forward for various stakeholders in this new era.</p>
+            <p class="mb-4">The original report delves into the capabilities of LLMs <a href="#ref52_spa" class="reference-link">[52]</a>, <a href="#ref53_spa" class="reference-link">[53]</a>, their dual nature presenting both transformative opportunities and significant challenges <a href="#ref68_spa" class="reference-link">[68]</a>, and the evolving landscapes of online publishing and scholarly work. Here, you can navigate through key themes, examine data from the report, and engage with the material in a structured way.</p>
+            <p class="mb-4">Use the navigation bar to jump to specific sections, or scroll to explore the interconnected facets of this technological shift. We'll look at how LLMs are reshaping content creation <a href="#ref51_spa" class="reference-link">[51]</a>, the enduring value of human intellect and integrity, and the path forward for various stakeholders in this new era.</p>
         </section>
 
         <section id="llm-shift" class="content-section min-h-screen fade-in">
             <h2 class="text-3xl font-bold text-teal-700 mb-6">The LLM Shift: Capabilities & Challenges</h2>
-            <p class="mb-6 text-stone-600">This section explores the foundational aspects of Large Language Models (LLMs), detailing their content generation capabilities and the inherent dual nature that brings both transformative potential and emerging challenges. Understanding these core concepts is crucial for appreciating their impact on blogging and research.</p>
+            <p class="mb-6 text-stone-600">This section explores the foundational aspects of Large Language Models (LLMs), detailing their content generation capabilities <a href="#ref29_spa" class="reference-link">[29]</a>, <a href="#ref30_spa" class="reference-link">[30]</a> and the inherent dual nature that brings both transformative potential <a href="#ref57_spa" class="reference-link">[57]</a> and emerging challenges <a href="#ref78_spa" class="reference-link">[78]</a>. Understanding these core concepts is crucial for appreciating their impact on blogging and research.</p>
 
             <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
                 <h3 class="text-2xl font-semibold text-amber-700 mb-3">Introduction to LLMs</h3>
-                <p class="mb-2">Sophisticated LLMs like GPT-4, Claude, and Gemini are spearheading a revolution in content creation. Built on complex neural networks (especially transformer architectures) and trained on colossal text datasets, they mimic human language with unnerving skill. Their core function—turning prompts into coherent, relevant text—is impacting fields reliant on written words, from marketing and customer service to data analysis and academic research. Businesses are rapidly adopting them to generate content, power chatbots, and analyze text for insights.</p>
+                <p class="mb-2">Sophisticated LLMs like GPT-4, Claude, and Gemini are spearheading a revolution in content creation. Built on complex neural networks (especially transformer architectures) and trained on colossal text datasets, they mimic human language with unnerving skill <a href="#ref52_spa" class="reference-link">[52]</a>. Their core function—turning prompts into coherent, relevant text—is impacting fields reliant on written words, from marketing and customer service <a href="#ref69_spa" class="reference-link">[69]</a> to data analysis and academic research. Businesses are rapidly adopting them to generate content, power chatbots, and analyze text for insights <a href="#ref53_spa" class="reference-link">[53]</a>.</p>
             </div>
 
             <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
                 <h3 class="text-2xl font-semibold text-amber-700 mb-3">The Dual Nature of LLMs</h3>
-                <p class="mb-2">The rise of LLMs is not a simple win. They offer transformation through boosted efficiency, scalability, and even artificial creativity. Drafting articles, summarizing info, translating, or coding could free human creators for higher-level tasks.</p>
+                <p class="mb-2">The rise of LLMs is not a simple win. They offer transformation through boosted efficiency, scalability, and even artificial creativity <a href="#ref64_spa" class="reference-link">[64]</a>. Drafting articles, summarizing info, translating, or coding <a href="#ref59_spa" class="reference-link">[59]</a> could free human creators for higher-level tasks.</p>
                 <p class="mb-2">However, this power brings fresh headaches:
                     <ul class="list-disc list-inside ml-4 mb-2 space-y-1">
-                        <li><strong>Misinformation:</strong> LLMs can "hallucinate," confidently presenting fiction as fact.</li>
-                        <li><strong>Bias:</strong> Trained on vast internet data, they can absorb and regurgitate societal biases (gender, race, culture), leading to unfair or discriminatory outputs.</li>
+                        <li><strong>Misinformation:</strong> LLMs can "hallucinate," confidently presenting fiction as fact <a href="#ref67_spa" class="reference-link">[67]</a>.</li>
+                        <li><strong>Bias:</strong> Trained on vast internet data, they can absorb and regurgitate societal biases (gender, race, culture), leading to unfair or discriminatory outputs <a href="#ref4_spa" class="reference-link">[4]</a>, <a href="#ref37_spa" class="reference-link">[37]</a>.</li>
                         <li><strong>Originality & Copyright:</strong> These concepts are now battlegrounds as laws and ethics struggle to keep pace.</li>
                     </ul>
                 </p>
-                <p class="mb-2">This duality demands a clear-eyed view: use these tools with relentless human oversight, critical evaluation, and solid ethical guardrails.</p>
+                <p class="mb-2">This duality demands a clear-eyed view: use these tools with relentless human oversight, critical evaluation, and solid ethical guardrails <a href="#ref6_spa" class="reference-link">[6]</a>, <a href="#ref68_spa" class="reference-link">[68]</a>.</p>
                 <h4 class="text-xl font-semibold text-stone-700 mt-4 mb-2">The Content Tsunami & The Signal-to-Noise Problem</h4>
-                <p class="mb-2">With LLMs widely available, content creation floodgates are open. This "democratization" leads to a content tsunami, making it Herculean to find quality, trustworthy material. The signal-to-noise ratio is tanking, increasing the value of good curators, critical thinking, and trusted sources. Access to information is shifting from a scarcity problem to one of overwhelming, often dubious, abundance, demanding a new literacy of discernment.</p>
+                <p class="mb-2">With LLMs widely available, content creation floodgates are open. This "democratization" leads to a content tsunami <a href="#ref64_spa" class="reference-link">[64]</a>, making it Herculean to find quality, trustworthy material. The signal-to-noise ratio is tanking, increasing the value of good curators, critical thinking, and trusted sources. Access to information is shifting from a scarcity problem to one of overwhelming, often dubious, abundance, demanding a new literacy of discernment.</p>
                 <h4 class="text-xl font-semibold text-stone-700 mt-4 mb-2">Accelerating Existing Digital Fires (and Some Positive Trends)</h4>
-                <p class="mb-2">LLMs amplify existing digital issues like misinformation and echo chambers. They can create industrial-scale disinformation or highly convincing phishing emails. Conversely, they can boost positive trends by making complex data digestible via summaries and translations, or aiding scientific discovery. LLMs don't invent all these woes; they make old ones bigger, faster, and uglier, demanding smarter, tougher, ethical responses.</p>
+                <p class="mb-2">LLMs amplify existing digital issues like misinformation and echo chambers <a href="#ref38_spa" class="reference-link">[38]</a>. They can create industrial-scale disinformation or highly convincing phishing emails. Conversely, they can boost positive trends by making complex data digestible via summaries and translations, or aiding scientific discovery. LLMs don't invent all these woes; they make old ones bigger, faster, and uglier, demanding smarter, tougher, ethical responses <a href="#ref79_spa" class="reference-link">[79]</a>.</p>
             </div>
         </section>
 
         <section id="blogging-era" class="content-section min-h-screen fade-in">
             <h2 class="text-3xl font-bold text-teal-700 mb-6">Blogging in the Age of AI</h2>
-            <p class="mb-6 text-stone-600">The ascent of LLMs is forcing a critical re-evaluation of blogging. This section examines how AI is reshaping the purpose and creation of blog content, the enduring importance of the human touch, strategies for readers to navigate this new landscape, and the ethical responsibilities for creators.</p>
+            <p class="mb-6 text-stone-600">The ascent of LLMs is forcing a critical re-evaluation of blogging. This section examines how AI is reshaping the purpose and creation of blog content <a href="#ref21_spa" class="reference-link">[21]</a>, the enduring importance of the human touch, strategies for readers to navigate this new landscape, and the ethical responsibilities for creators.</p>
 
             <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
                 <h3 class="text-2xl font-semibold text-amber-700 mb-3">Redefining the Blog: Purpose, Creation, and Strategy</h3>
-                <p class="mb-2">LLMs are broadening the blog's purpose: personalized posts, interactive AI Q&As, instant translations, and data-driven articles are becoming feasible. AI writing assistants are integrated into the workflow: planning content gaps, outlining, drafting basics, and enhancing readability. Bloggers report 40-70% faster content creation.</p>
-                <p>Strategically, businesses can scale content marketing, maintain publishing pace, and target niche audiences easily. The catch? Content can become bland. A detailed "voice guide" for AI is suggested to maintain uniqueness, though its efficacy is debatable.</p>
+                <p class="mb-2">LLMs are broadening the blog's purpose: personalized posts, interactive AI Q&As <a href="#ref31_spa" class="reference-link">[31]</a>, instant translations, and data-driven articles are becoming feasible. AI writing assistants are integrated into the workflow: planning content gaps, outlining, drafting basics, and enhancing readability <a href="#ref29_spa" class="reference-link">[29]</a>. Bloggers report 40-70% faster content creation.</p>
+                <p>Strategically, businesses can scale content marketing <a href="#ref69_spa" class="reference-link">[69]</a>, maintain publishing pace, and target niche audiences easily. The catch? Content can become bland. A detailed "voice guide" for AI is suggested to maintain uniqueness, though its efficacy is debatable.</p>
             </div>
 
             <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
                 <h3 class="text-2xl font-semibold text-amber-700 mb-3">The Enduring Value of the Human Touch</h3>
-                <p class="mb-2">In a world choking on AI fluff, real authenticity and unique human takes are gold. "Custom," "hand-made" content with personal stories, real expertise, unique viewpoints, and emotional depth stands out—qualities current AI struggles to fake convincingly. As AI mimicry improves, true human originality becomes more precious.</p>
+                <p class="mb-2">In a world choking on AI fluff, real authenticity and unique human takes are gold <a href="#ref70_spa" class="reference-link">[70]</a>. "Custom," "hand-made" content with personal stories, real expertise, unique viewpoints, and emotional depth stands out—qualities current AI struggles to fake convincingly <a href="#ref37_spa" class="reference-link">[37]</a>. As AI mimicry improves, true human originality becomes more precious.</p>
                 <p class="mb-2">For the writer, writing is a cognitive workout, organizing thoughts and sharpening critical thinking. A blog is a portfolio of thinking and expertise. Human connection through writing remains a powerful motivator. LLMs can't build genuine community.</p>
-                <p class="mb-2">Ironically, AI needs us: high-quality, original human content trains and refines LLMs. If LLMs feast on their own recycled text, digital inbreeding could degrade quality. Keeping human content fresh is vital for all communication.</p>
-                <p>The blogger's role morphs into an "AI orchestrator" and "humanity infuser"—more strategic thinking, prompting, editing, and injecting irreplaceable human elements like personal stories, nuanced opinions, and ethical insights.</p>
+                <p class="mb-2">Ironically, AI needs us: high-quality, original human content trains and refines LLMs. If LLMs feast on their own recycled text, digital inbreeding could degrade quality. Keeping human content fresh is vital for all communication <a href="#ref54_spa" class="reference-link">[54]</a>.</p>
+                <p>The blogger's role morphs into an "AI orchestrator" and "humanity infuser"—more strategic thinking, prompting, editing, and injecting irreplaceable human elements like personal stories, nuanced opinions, and ethical insights <a href="#ref51_spa" class="reference-link">[51]</a>.</p>
             </div>
 
             <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
@@ -169,67 +231,25 @@
                         <li>Cross-checking with multiple reliable sources.</li>
                         <li>Scrutinizing context and watching for oversimplifications.</li>
                         <li>Fact-checking in real-time.</li>
-                        <li>Remembering AI's limits: genuine emotion, deep context, novel ideas, complex ethics.</li>
+                        <li>Remembering AI's limits: genuine emotion, deep context, novel ideas, complex ethics <a href="#ref68_spa" class="reference-link">[68]</a>.</li>
                     </ul>
                 </p>
 
                 <h4 class="text-xl font-semibold text-stone-700 mt-4 mb-2">Leveraging AI Content Detection Tools (with caveats)</h4>
-                <p class="mb-2">Tools like Sapling, Winston AI, GPTZero, etc., analyze linguistic quirks. However, their reliability is a work in progress; they can produce false positives or miss AI text. They're a handy extra, not a substitute for human judgment.</p>
+                <p class="mb-2">Tools like Sapling, Winston AI, GPTZero, etc. <a href="#ref23_spa" class="reference-link">[23]</a>, analyze linguistic quirks. However, their reliability is a work in progress; they can produce false positives or miss AI text. They're a handy extra, not a substitute for human judgment.</p>
                 <div id="table1-container" class="table-container my-4">
                     <h5 class="text-lg font-semibold text-stone-600 mb-2">Table 1: Overview of Selected AI Content Detection Tools</h5>
                     <table class="min-w-full divide-y divide-stone-300 bg-white rounded-lg shadow">
                         <thead class="bg-stone-50">
-                            <tr>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Tool Name</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Reported Accuracy / Performance Notes</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Key Features</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Pricing</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Primary Use Case</th>
-                            </tr>
+                            <tr><th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Tool Name</th><th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Reported Accuracy / Performance Notes</th><th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Key Features</th><th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Pricing</th><th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Primary Use Case</th></tr>
                         </thead>
                         <tbody class="divide-y divide-stone-200">
-                            <tr>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Originality.ai</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Claimed 85% overall accuracy; robust against obfuscation; low false positive rate but can miss some AI text.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Plagiarism checker, team features, API access.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Paid plans.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Content publishers, SEO, professional writers.</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">GPTZero</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Good accuracy with latest models; ~66.5% overall accuracy in one study, missed ~35% AI text.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Perplexity/burstiness analysis, plagiarism checker, API, Chrome extension, Google Docs integration.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Free version with limits; premium plans.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Educators, general users.</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Winston AI</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Good overall performance; potential inconsistencies with human-edited content. Accuracy varied.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">AI text & image detection, plagiarism checker, OCR, Zapier integration, browser extension.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Free trial/tier; premium plans.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">General content verification.</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Copyleaks</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Reported high accuracy (100% in one study, no false positives).</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Plagiarism checker, detection profile customization, document scanner, report sharing, API.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Free scans limited; credit-based premium.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Academic, business, large documents.</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">QuillBot AI Detector</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Acknowledges no detector is 100% reliable; identifies AI-generated/refined content.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Free unlimited scans (1200 words), line-by-line report, multi-language.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Free.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">General users, students, writers.</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">ZeroGPT</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Above average in some tests; struggled with ChatGPT text; inconsistent.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Messaging bots, multi-language/file batch support, API.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Free plan (15k chars); premium plans.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">General users, messaging app integration.</td>
-                            </tr>
+                            <tr><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Originality.ai</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Claimed 85% overall accuracy; robust against obfuscation; low false positive rate but can miss some AI text.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Plagiarism checker, team features, API access.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Paid plans.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Content publishers, SEO, professional writers.</td></tr>
+                            <tr><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">GPTZero</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Good accuracy with latest models; ~66.5% overall accuracy in one study, missed ~35% AI text.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Perplexity/burstiness analysis, plagiarism checker, API, Chrome extension, Google Docs integration.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Free version with limits; premium plans.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Educators, general users.</td></tr>
+                            <tr><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Winston AI</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Good overall performance; potential inconsistencies with human-edited content. Accuracy varied.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">AI text & image detection, plagiarism checker, OCR, Zapier integration, browser extension.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Free trial/tier; premium plans.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">General content verification.</td></tr>
+                            <tr><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Copyleaks</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Reported high accuracy (100% in one study, no false positives).</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Plagiarism checker, detection profile customization, document scanner, report sharing, API.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Free scans limited; credit-based premium.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Academic, business, large documents.</td></tr>
+                            <tr><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">QuillBot AI Detector</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Acknowledges no detector is 100% reliable; identifies AI-generated/refined content.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Free unlimited scans (1200 words), line-by-line report, multi-language.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Free.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">General users, students, writers.</td></tr>
+                            <tr><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">ZeroGPT</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Above average in some tests; struggled with ChatGPT text; inconsistent.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Messaging bots, multi-language/file batch support, API.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Free plan (15k chars); premium plans.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">General users, messaging app integration.</td></tr>
                         </tbody>
                     </table>
                     <p class="text-xs text-stone-500 mt-1">*Note: Accuracy claims and features are subject to change. Critically evaluate effectiveness. Take accuracy claims with a large grain of salt.</p>
@@ -241,10 +261,10 @@
 
             <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
                 <h3 class="text-2xl font-semibold text-amber-700 mb-3">Ethical Imperatives in AI-Assisted Blogging</h3>
-                <p class="mb-2">Using LLMs in blogging comes with an ethical backpack:
+                <p class="mb-2">Using LLMs in blogging comes with an ethical backpack <a href="#ref79_spa" class="reference-link">[79]</a>:
                     <ul class="list-disc list-inside ml-4 mb-2 space-y-1">
-                        <li><strong>Bias:</strong> LLMs train on the biased internet. Meticulously review, edit, and de-bias AI drafts. Fairness and inclusivity aren't optional.</li>
-                        <li><strong>Misinformation ("Hallucinations"):</strong> LLMs can spin plausible fiction. Rigorous fact-checking of *every* AI claim is non-negotiable.</li>
+                        <li><strong>Bias:</strong> LLMs train on the biased internet. Meticulously review, edit, and de-bias AI drafts. Fairness and inclusivity aren't optional <a href="#ref4_spa" class="reference-link">[4]</a>, <a href="#ref37_spa" class="reference-link">[37]</a>.</li>
+                        <li><strong>Misinformation ("Hallucinations"):</strong> LLMs can spin plausible fiction. Rigorous fact-checking of *every* AI claim is non-negotiable <a href="#ref67_spa" class="reference-link">[67]</a>.</li>
                         <li><strong>Transparency:</strong> If AI had a heavy hand, tell readers. It maintains trust.</li>
                         <li><strong>Copyright & Originality:</strong> Legal status is evolving. Leaning too heavily on AI can make your blog a generic echo. Use AI to help, not replace, your brain.</li>
                     </ul>
@@ -254,62 +274,27 @@
 
         <section id="academia-llms" class="content-section min-h-screen fade-in">
             <h2 class="text-3xl font-bold text-teal-700 mb-6">Academia Transformed by LLMs</h2>
-            <p class="mb-6 text-stone-600">Large Language Models are significantly impacting academic research and publishing. This section delves into how LLMs are reshaping research conduct and scholarly writing, the critical role of the human researcher, methods for ensuring research quality, and the evolving ethical guidelines and authorship policies.</p>
+            <p class="mb-6 text-stone-600">Large Language Models are significantly impacting academic research and publishing <a href="#ref56_spa" class="reference-link">[56]</a>. This section delves into how LLMs are reshaping research conduct and scholarly writing, the critical role of the human researcher, methods for ensuring research quality, and the evolving ethical guidelines and authorship policies.</p>
 
             <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
                 <h3 class="text-2xl font-semibold text-amber-700 mb-3">LLMs in the Lab & Library</h3>
-                <p class="mb-2">LLMs assist in brainstorming, literature reviews (potentially "living synthesis" systems), and data analysis (generating code for Stata, R, Python). About 81% of researchers use LLMs, mostly for info seeking and editing. In clinical research, they're eyed for screening participants and reminders.</p>
+                <p class="mb-2">LLMs assist in brainstorming, literature reviews (potentially "living synthesis" systems), and data analysis (generating code for Stata, R, Python <a href="#ref43_spa" class="reference-link">[43]</a>). About 81% of researchers use LLMs, mostly for info seeking and editing. In clinical research, they're eyed for screening participants and reminders.</p>
                 <p class="mb-2">For writing, LLMs help with language polishing, proofreading (a boon for non-native English speakers), titles, abstracts, and paper structure. This can speed up publication.</p>
-                <p class="mb-2"><strong>Research Equity:</strong> LLMs might level the playing field for disadvantaged groups (non-White, junior, non-native English speakers) who report higher use and benefit. However, training data biases (gender, culture, geography) and unequal access to tools/know-how are risks. Proactive bias mitigation and equitable access are crucial.</p>
+                <p class="mb-2"><strong>Research Equity:</strong> LLMs might level the playing field for disadvantaged groups (non-White, junior, non-native English speakers) who report higher use and benefit. However, training data biases (gender, culture, geography) and unequal access to tools/know-how are risks <a href="#ref4_spa" class="reference-link">[4]</a>. Proactive bias mitigation and equitable access are crucial.</p>
 
                 <div id="table2-container" class="table-container my-4">
                     <h5 class="text-lg font-semibold text-stone-600 mb-2">Table 2: LLM Impact on the Academic Research Workflow</h5>
                     <table class="min-w-full divide-y divide-stone-300 bg-white rounded-lg shadow">
                         <thead class="bg-stone-50">
-                            <tr>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Research Stage</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Potential LLM Applications</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Key Advantages</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Associated Risks/Limitations</th>
-                            </tr>
+                            <tr><th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Research Stage</th><th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Potential LLM Applications</th><th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Key Advantages</th><th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Associated Risks/Limitations</th></tr>
                         </thead>
                         <tbody class="divide-y divide-stone-200">
-                            <tr>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Idea Generation/Brainstorming</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Suggesting research questions, exploring concepts, outlining projects.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Stimulating creativity, overcoming writer's block, identifying novel connections.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Output may be generic, unoriginal, biased; risk of outsourcing brain too early.</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Literature Review</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Searching, summarizing articles (badly sometimes), identifying themes, drafting reviews, "living synthesis" (theory).</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Accelerating discovery, improving comprehensiveness (maybe), saving time.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Missing papers, mangling findings, superficial summaries, "hallucinating" sources, citation biases.</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Data Collection/Analysis</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Generating code (Python, R), assisting qualitative data theming.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Efficiency in data handling, automating coding, aiding non-expert coders (with supervision!).</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Buggy/inefficient code (needs expert eyes), misapplying stats, limited grasp of data subtleties.</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Manuscript Drafting</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Generating first drafts (Intro, Methods), titles, abstracts, structuring.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Speeding writing, overcoming drafting hurdles, providing templates.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Shallow content, factual errors/fabrications, misrepresenting intent, stylistically bland.</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Editing/Proofreading</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Correcting grammar/spelling, improving structure/flow, enhancing readability.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Improving language quality (non-native speakers), reducing editing time, ensuring consistency.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">May miss subtle errors, over-standardize writing, introduce awkward phrasing without human watch.</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Submission Preparation</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Formatting references, checking journal guidelines (potentially, probably poorly).</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Ensuring adherence (don't bet on it), saving time on admin.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Accuracy depends on training; human verification essential.</td>
-                            </tr>
+                            <tr><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Idea Generation/Brainstorming</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Suggesting research questions, exploring concepts, outlining projects.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Stimulating creativity, overcoming writer's block, identifying novel connections.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Output may be generic, unoriginal, biased; risk of outsourcing brain too early.</td></tr>
+                            <tr><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Literature Review</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Searching, summarizing articles (badly sometimes), identifying themes, drafting reviews, "living synthesis" (theory).</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Accelerating discovery, improving comprehensiveness (maybe), saving time.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Missing papers, mangling findings, superficial summaries, "hallucinating" sources, citation biases.</td></tr>
+                            <tr><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Data Collection/Analysis</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Generating code (Python, R), assisting qualitative data theming.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Efficiency in data handling, automating coding, aiding non-expert coders (with supervision!).</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Buggy/inefficient code (needs expert eyes), misapplying stats, limited grasp of data subtleties <a href="#ref12_spa" class="reference-link">[12]</a>.</td></tr>
+                            <tr><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Manuscript Drafting</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Generating first drafts (Intro, Methods), titles, abstracts, structuring.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Speeding writing, overcoming drafting hurdles, providing templates.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Shallow content, factual errors/fabrications, misrepresenting intent, stylistically bland.</td></tr>
+                            <tr><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Editing/Proofreading</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Correcting grammar/spelling, improving structure/flow, enhancing readability.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Improving language quality (non-native speakers), reducing editing time, ensuring consistency.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">May miss subtle errors, over-standardize writing, introduce awkward phrasing without human watch.</td></tr>
+                            <tr><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Submission Preparation</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Formatting references, checking journal guidelines (potentially, probably poorly).</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Ensuring adherence (don't bet on it), saving time on admin.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Accuracy depends on training; human verification essential.</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -317,8 +302,8 @@
 
             <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
                 <h3 class="text-2xl font-semibold text-amber-700 mb-3">The Critical Role of the Researcher</h3>
-                <p class="mb-2">The buck for intellectual content, accuracy, and integrity stops with the human researcher. LLMs are pattern-matching parrots; they don't understand, can't be accountable, and lack critical judgment.</p>
-                <p class="mb-2">"Hallucinating" (plausible but wrong info, fake references) demands meticulous human verification. LLMs might misunderstand projects, inject irrelevance, or produce generic output. In complex fields (e.g., clinical neurology), the gap between LLM pattern-matching and human reasoning is a chasm. Human authors are irreplaceable for deep critical analysis, grasping uncertainties, and ensuring AI-generated bits are valid and fit for purpose.</p>
+                <p class="mb-2">The buck for intellectual content, accuracy, and integrity stops with the human researcher. LLMs are pattern-matching parrots; they don't understand, can't be accountable, and lack critical judgment <a href="#ref52_spa" class="reference-link">[52]</a>.</p>
+                <p class="mb-2">"Hallucinating" (plausible but wrong info, fake references <a href="#ref67_spa" class="reference-link">[67]</a>) demands meticulous human verification. LLMs might misunderstand projects, inject irrelevance, or produce generic output. In complex fields (e.g., clinical neurology), the gap between LLM pattern-matching and human reasoning is a chasm. Human authors are irreplaceable for deep critical analysis, grasping uncertainties, and ensuring AI-generated bits are valid and fit for purpose <a href="#ref22_spa" class="reference-link">[22]</a>.</p>
                 <p>This AI circus might redefine "scholarly contribution." If LLMs do grunt work, human value shifts to novel questions, ingenious methodologies, profound analysis, synthesis, ethics, and nuanced communication. "Intellectual labor" (critical thought, creativity, ethics, context) becomes paramount. Academic evaluation may need to reward these higher-order skills, not just publication counts.</p>
             </div>
 
@@ -335,7 +320,7 @@
                             <li>Speeding initial submission handling.</li>
                             <li>Summarizing manuscripts for reviewers (if trusted).</li>
                             <li>Maintaining review consistency.</li>
-                            <li>Polishing language. Some studies claim AI is faster for certain initial tasks.</li>
+                            <li>Polishing language. Some studies claim AI is faster for certain initial tasks <a href="#ref26_spa" class="reference-link">[26]</a>.</li>
                         </ul>
                     </div>
                 </div>
@@ -343,17 +328,17 @@
                     <button class="accordion-button bg-stone-200 hover:bg-stone-300 text-stone-800 font-semibold py-2 px-4 rounded-lg w-full text-left mb-1" data-target="pr-risks">Significant Risks (Click to expand/collapse)</button>
                     <div id="pr-risks" class="accordion-content bg-stone-50 p-4 rounded-b-lg border border-stone-200">
                         <ul class="list-disc list-inside space-y-1">
-                            <li><strong>Confidentiality Down the Drain:</strong> Feeding confidential manuscripts to third-party AI is an ethical no-no.</li>
+                            <li><strong>Confidentiality Down the Drain:</strong> Feeding confidential manuscripts to third-party AI is an ethical no-no <a href="#ref27_spa" class="reference-link">[27]</a>.</li>
                             <li><strong>Bias on Steroids:</strong> AI can reflect/amplify training data biases, skewing evaluations.</li>
                             <li><strong>Accuracy and Superficiality:</strong> LLMs might miss subtle flaws, lack context understanding, judge novelty poorly, and produce shallow/inaccurate reviews. Medical paper studies show LLMs are poor at spotting errors.</li>
-                            <li><strong>The Black Box Problem:</strong> Lack of transparency in AI decisions raises accountability issues.</li>
+                            <li><strong>The Black Box Problem:</strong> Lack of transparency in AI decisions raises accountability issues <a href="#ref77_spa" class="reference-link">[77]</a>.</li>
                         </ul>
                     </div>
                 </div>
                 <p class="mb-2"><strong>Verdict:</strong> LLMs are not ready for substantive research evaluation, especially in complex fields. A hybrid approach (AI assists, humans control critical judgment) is currently sane. The "reproducibility crisis" could worsen if LLM use (models, versions, prompts, settings) isn't meticulously documented. Transparency is fundamental to scientific rigor.</p>
 
                 <h4 class="text-xl font-semibold text-stone-700 mt-4 mb-2">Authorship Policies and Ethical Guidelines</h4>
-                <p class="mb-2">Major publishers/bodies agree:
+                <p class="mb-2">Major publishers/bodies agree <a href="#ref27_spa" class="reference-link">[27]</a>, <a href="#ref31_spa" class="reference-link">[31]</a>:
                     <ul class="list-disc list-inside ml-4 mb-2 space-y-1">
                         <li><strong>AI Is Not an Author:</strong> LLMs can't take responsibility/accountability.</li>
                         <li><strong>Disclosure Is a Must:</strong> State LLM use (tool, purpose) in acknowledgments/methods.</li>
@@ -366,64 +351,16 @@
                      <h5 class="text-lg font-semibold text-stone-600 mb-2">Table 3: Summary of Publisher/Organizational Guidelines on AI Use</h5>
                     <table class="min-w-full divide-y divide-stone-300 bg-white rounded-lg shadow">
                         <thead class="bg-stone-50">
-                            <tr>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Publisher/Organization</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">AI Authorship</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Disclosure</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">AI in Peer Review</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Data Privacy</th>
-                            </tr>
+                            <tr><th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Publisher/Organization</th><th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">AI Authorship</th><th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Disclosure</th><th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">AI in Peer Review</th><th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">Data Privacy</th></tr>
                         </thead>
                         <tbody class="divide-y divide-stone-200">
-                            <tr>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Elsevier</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">AI cannot be author.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Mandatory for language/readability.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Author responsibility key.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Implied author responsibility.</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Brill</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Aligns with COPE; AI not author.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Transparency per COPE; authors responsible.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Not detailed.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Implied author responsibility.</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">ACS</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">AI tools cannot meet requirements.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Mandatory in Acknowledgments/Methods.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Reviewers prohibited (confidentiality).</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Authors responsible for all content.</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">AIMS</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">AI tools not author (COPE align).</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Mandatory in "Use of AI tools declaration".</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Editors/reviewers must not share (confidentiality).</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Never share sensitive info on AI platforms.</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">COPE</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">AI tools not author (can't take responsibility).</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Recommends transparency/disclosures.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Emphasizes transparency/disclosures.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">General ethical principles.</td>
-                            </tr>
-                             <tr>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">NIH/NSF</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">N/A for authorship.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">N/A for authorship.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Prohibit AI use in peer review/applications.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Adherence to data security expected.</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">ICMJE</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">LLMs do not qualify for authorship.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Use documented (e.g., Methods).</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Implied human responsibility.</td>
-                                <td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Implied human responsibility.</td>
-                            </tr>
+                            <tr><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Elsevier</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">AI cannot be author.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Mandatory for language/readability.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Author responsibility key.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Implied author responsibility.</td></tr>
+                            <tr><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Brill</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Aligns with COPE; AI not author.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Transparency per COPE; authors responsible.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Not detailed.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Implied author responsibility.</td></tr>
+                            <tr><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">ACS</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">AI tools cannot meet requirements.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Mandatory in Acknowledgments/Methods.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Reviewers prohibited (confidentiality).</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Authors responsible for all content.</td></tr>
+                            <tr><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">AIMS</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">AI tools not author (COPE align).</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Mandatory in "Use of AI tools declaration".</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Editors/reviewers must not share (confidentiality).</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Never share sensitive info on AI platforms.</td></tr>
+                            <tr><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">COPE</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">AI tools not author (can't take responsibility).</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Recommends transparency/disclosures.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Emphasizes transparency/disclosures.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">General ethical principles.</td></tr>
+                            <tr><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">NIH/NSF</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">N/A for authorship.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">N/A for authorship.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Prohibit AI use in peer review/applications.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Adherence to data security expected.</td></tr>
+                            <tr><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">ICMJE</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">LLMs do not qualify for authorship.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Use documented (e.g., Methods).</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Implied human responsibility.</td><td class="whitespace-normal px-3 py-4 text-sm text-stone-500">Implied human responsibility.</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -432,9 +369,9 @@
                 <h3 class="text-2xl font-semibold text-amber-700 mb-3">Navigating New Norms: Responsible LLM Use in Academia</h3>
                  <p class="mb-2">Researchers should:
                     <ul class="list-disc list-inside ml-4 mb-2 space-y-1">
-                        <li>Follow target journal's LLM rules; be upfront about risks.</li>
+                        <li>Follow target journal's LLM rules; be upfront about risks <a href="#ref6_spa" class="reference-link">[6]</a>.</li>
                         <li>Don't plagiarize. Treat LLM text as a source: evaluate, integrate, cite if needed. No copy-paste.</li>
-                        <li>Keep confidential stuff confidential. Don't feed sensitive data to public LLMs.</li>
+                        <li>Keep confidential stuff confidential. Don't feed sensitive data to public LLMs <a href="#ref31_spa" class="reference-link">[31]</a>.</li>
                         <li>Be ruthlessly skeptical. Triple-check LLM output for truth, accuracy, completeness.</li>
                         <li>Stay alert for bias. Actively look for and fix gender, racial, cultural biases.</li>
                         <li>Get IRB approval for patient data research (even de-identified).</li>
@@ -446,18 +383,18 @@
 
         <section id="future-path" class="content-section min-h-screen fade-in">
             <h2 class="text-3xl font-bold text-teal-700 mb-6">Forging the Future with LLMs</h2>
-            <p class="mb-6 text-stone-600">This section looks ahead, emphasizing the need for critical AI literacy for everyone involved with content, and outlining recommendations for various stakeholders to navigate the evolving landscape responsibly and ethically.</p>
+            <p class="mb-6 text-stone-600">This section looks ahead, emphasizing the need for critical AI literacy <a href="#ref12_spa" class="reference-link">[12]</a> for everyone involved with content, and outlining recommendations for various stakeholders to navigate the evolving landscape responsibly and ethically <a href="#ref81_spa" class="reference-link">[81]</a>.</p>
 
             <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
                 <h3 class="text-2xl font-semibold text-amber-700 mb-3">Developing Critical AI Literacy</h3>
-                <p class="mb-2">AI literacy is becoming as basic as reading/writing. It's not just knowing how AI works, but awareness of its limits, ethical minefields, and that human judgment is king. Key parts:
+                <p class="mb-2">AI literacy is becoming as basic as reading/writing. It's not just knowing how AI works <a href="#ref52_spa" class="reference-link">[52]</a>, but awareness of its limits, ethical minefields, and that human judgment is king. Key parts:
                     <ul class="list-disc list-inside ml-4 mb-2 space-y-1">
                         <li><strong>Dissect AI outputs critically:</strong> Question truthfulness, relevance, biases. Cross-check, analyze AI "reasoning," spot blunders.</li>
-                        <li><strong>Understand AI's inner workings & blind spots:</strong> Current AI struggles with emotional intelligence, deep context, original thought, complex ethics, new situations.</li>
+                        <li><strong>Understand AI's inner workings & blind spots:</strong> Current AI struggles with emotional intelligence, deep context, original thought, complex ethics, new situations <a href="#ref68_spa" class="reference-link">[68]</a>.</li>
                     </ul>
                 </p>
                 <p class="mb-2">Teaching AI literacy should focus on argument analysis, evidence evaluation, spotting assumptions/biases/fallacies. "Infusion model" (embedding critical thinking in subjects) is effective.</p>
-                <p>Using LLMs is a dance, not dictation: guide with smart prompts, refine suggestions, blend with human expertise. This "AI collaboration" (prompt engineering, evaluation, knowing AI's limits) is vital. Schools/training must teach these human-AI partnership skills.</p>
+                <p>Using LLMs is a dance, not dictation: guide with smart prompts, refine suggestions, blend with human expertise. This "AI collaboration" (prompt engineering, evaluation, knowing AI's limits) is vital <a href="#ref51_spa" class="reference-link">[51]</a>. Schools/training must teach these human-AI partnership skills.</p>
             </div>
 
             <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
@@ -467,13 +404,13 @@
                     <div>
                         <button class="accordion-button bg-stone-200 hover:bg-stone-300 text-stone-800 font-semibold py-2 px-4 rounded-lg w-full text-left" data-target="rec-writers">For Writers and Bloggers (Click to expand/collapse)</button>
                         <div id="rec-writers" class="accordion-content bg-stone-50 p-4 rounded-b-lg border border-stone-200">
-                            Embrace AI as a (sometimes dim-witted) assistant, not replacement. Add unique human stuff: personal stories, deep experience, original thoughts, real emotion. Be upfront about AI use. Sharpen critical evaluation skills.
+                            Embrace AI as a (sometimes dim-witted) assistant, not replacement. Add unique human stuff: personal stories, deep experience, original thoughts, real emotion. Be upfront about AI use <a href="#ref69_spa" class="reference-link">[69]</a>. Sharpen critical evaluation skills.
                         </div>
                     </div>
                     <div>
                         <button class="accordion-button bg-stone-200 hover:bg-stone-300 text-stone-800 font-semibold py-2 px-4 rounded-lg w-full text-left" data-target="rec-researchers">For Researchers and Academics (Click to expand/collapse)</button>
                         <div id="rec-researchers" class="accordion-content bg-stone-50 p-4 rounded-b-lg border border-stone-200">
-                            Use LLMs responsibly, ethically, following rules. Rigorous verification, transparent disclosure. Focus on higher-order thinking, novel ideas, methodological rigor. Speak up for fair, robust, transparent AI standards.
+                            Use LLMs responsibly, ethically, following rules. Rigorous verification, transparent disclosure. Focus on higher-order thinking, novel ideas, methodological rigor <a href="#ref12_spa" class="reference-link">[12]</a>. Speak up for fair, robust, transparent AI standards.
                         </div>
                     </div>
                     <div>
@@ -485,7 +422,7 @@
                     <div>
                         <button class="accordion-button bg-stone-200 hover:bg-stone-300 text-stone-800 font-semibold py-2 px-4 rounded-lg w-full text-left" data-target="rec-developers">For Technology Developers (Click to expand/collapse)</button>
                         <div id="rec-developers" class="accordion-content bg-stone-50 p-4 rounded-b-lg border border-stone-200">
-                            Build LLMs more transparent, fairer, less prone to bias/"hallucinations." Better source citation, clearer uncertainty indicators. Talk to domain experts. Robust strategies for diverse data, bias detection/mitigation are ethical must-haves.
+                            Build LLMs more transparent, fairer, less prone to bias/"hallucinations." Better source citation, clearer uncertainty indicators <a href="#ref4_spa" class="reference-link">[4]</a>, <a href="#ref49_spa" class="reference-link">[49]</a>. Talk to domain experts. Robust strategies for diverse data, bias detection/mitigation are ethical must-haves.
                         </div>
                     </div>
                     <div>
@@ -495,22 +432,114 @@
                         </div>
                     </div>
                 </div>
-                <p class="mt-4">The breakneck speed of LLM development has left ethics/norms/regulations eating dust, creating an "ethical debt" (bias, misinformation, job displacement, privacy, accountability). Tackling this needs proactive, all-hands engagement, forward-thinking governance, and ethical foresight, guided by human values.</p>
+                <p class="mt-4">The breakneck speed of LLM development has left ethics/norms/regulations eating dust, creating an "ethical debt" (bias, misinformation, job displacement, privacy, accountability <a href="#ref71_spa" class="reference-link">[71]</a>). Tackling this needs proactive, all-hands engagement, forward-thinking governance, and ethical foresight, guided by human values.</p>
             </div>
         </section>
 
         <section id="conclusion" class="content-section min-h-screen fade-in">
             <h2 class="text-3xl font-bold text-teal-700 mb-6">Conclusion: Embracing AI, Championing Humanity</h2>
-            <p class="mb-6 text-stone-600">This final section encapsulates the overarching message of the report: LLMs are redrawing the content map, offering a mix of opportunity and challenge. The path forward involves a partnership with AI, valuing human intellect and integrity above all.</p>
+            <p class="mb-6 text-stone-600">This final section encapsulates the overarching message of the report: LLMs are redrawing the content map, offering a mix of opportunity and challenge. The path forward involves a partnership with AI <a href="#ref82_spa" class="reference-link">[82]</a>, valuing human intellect and integrity above all.</p>
 
             <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
-                <p class="mb-2">The rise of LLMs is undeniably redrawing the map for content, offering efficiency and scale but also concerns about integrity, bias, authenticity, and ethics. The core challenge: tap into AI's power without sacrificing human values, intellectual rigor, and ethical principles.</p>
-                <p class="mb-2">The future looks like an uneasy partnership: AI handles drudgery, freeing humans for creativity, critical thought, ethical calls, and genuine insights. The "human touch" (originality, lived experience, emotional intelligence, connection) becomes more valuable. Navigating this means constant learning, adaptability, and widespread critical AI literacy.</p>
-                <p class="mb-2">As LLMs churn out "good enough" content cheaply, a "value recalibration" of human skills is likely. Skills LLMs replicate (summarizing, boilerplate) may devalue. Skills LLMs lack (true originality, profound critical/ethical reasoning, complex problem-solving, empathy) become premium. This demands rethinking education, training, and societal rewards.</p>
-                <p class="mb-2">LLMs' transformative power carries risks without strong ethical guardrails and governance. Tech fixes alone won't solve bias, misinformation, or trust erosion. We need a comprehensive, "human-centered" governance framework (guidelines, standards, policy, laws) prioritizing well-being, fairness, accountability, transparency. Building this needs all voices.</p>
+                <p class="mb-2">The rise of LLMs is undeniably redrawing the map for content, offering efficiency and scale but also concerns about integrity, bias, authenticity, and ethics. The core challenge: tap into AI's power without sacrificing human values, intellectual rigor, and ethical principles <a href="#ref76_spa" class="reference-link">[76]</a>.</p>
+                <p class="mb-2">The future looks like an uneasy partnership: AI handles drudgery, freeing humans for creativity, critical thought, ethical calls, and genuine insights. The "human touch" (originality, lived experience, emotional intelligence, connection) becomes more valuable <a href="#ref70_spa" class="reference-link">[70]</a>. Navigating this means constant learning, adaptability, and widespread critical AI literacy.</p>
+                <p class="mb-2">As LLMs churn out "good enough" content cheaply, a "value recalibration" of human skills is likely. Skills LLMs replicate (summarizing, boilerplate) may devalue. Skills LLMs lack (true originality, profound critical/ethical reasoning, complex problem-solving, empathy) become premium <a href="#ref73_spa" class="reference-link">[73]</a>. This demands rethinking education, training, and societal rewards.</p>
+                <p class="mb-2">LLMs' transformative power carries risks without strong ethical guardrails and governance. Tech fixes alone won't solve bias, misinformation, or trust erosion <a href="#ref78_spa" class="reference-link">[78]</a>. We need a comprehensive, "human-centered" governance framework (guidelines, standards, policy, laws) prioritizing well-being, fairness, accountability, transparency. Building this needs all voices.</p>
                 <p>Ultimately, this is a shared responsibility. The goal: ensure these tools augment human capabilities, foster understanding, and serve the common good, reminding us technology should serve human intellect, creativity, and integrity.</p>
             </div>
         </section>
+
+        <section id="references-section" class="content-section min-h-screen fade-in">
+            <h2 class="text-3xl font-bold text-teal-700 mb-6">References</h2>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <p class="mb-4 text-stone-600">The following references are primarily sourced from a comprehensive report on "The Evolving Art and Science of Software Demonstration" and its intersection with AI. They are linked within this SPA on "LLMs in Blogging & Research" where broader themes such as AI capabilities, ethical considerations, content creation tools, and future trends overlap. Due to the differing primary topics of the SPA and the reference source, not all references are cited in-text, but all are provided here for completeness.</p>
+                <ol class="list-decimal text-stone-700 space-y-1">
+                    <li id="ref1_spa" class="reference-item">The Workstream. "What is Proof of Concept? [+Why it Matters]." Accessed May 8, 2025. <a href="https://www.atlassian.com/work-management/project-management/proof-of-concept" target="_blank" rel="noopener noreferrer">https://www.atlassian.com/work-management/project-management/proof-of-concept</a></li>
+                    <li id="ref2_spa" class="reference-item">Zudu. "Best practices for developing a proof of concept." Accessed May 8, 2025. <a href="https://zudu.co.uk/blog/best-practices-for-developing-a-proof-of-concept/" target="_blank" rel="noopener noreferrer">https://zudu.co.uk/blog/best-practices-for-developing-a-proof-of-concept/</a></li>
+                    <li id="ref3_spa" class="reference-item">QArea. "AI Proof of Concept: How to Build AI POC That Meets Your Needs." Accessed May 8, 2025. <a href="https://qarea.com/blog/ai-proof-of-concept-benefits-stages-challenges" target="_blank" rel="noopener noreferrer">https://qarea.com/blog/ai-proof-of-concept-benefits-stages-challenges</a></li>
+                    <li id="ref4_spa" class="reference-item">Benzur, Liat. "Avoiding the “Cool Demo” Trap in Healthcare AI: From PoC to Real-World Impact." Accessed May 8, 2025. <a href="https://liatbenzur.com/2025/02/04/healthcare-ai-cool-demo-trap-moving-poc-to-production/" target="_blank" rel="noopener noreferrer">https://liatbenzur.com/2025/02/04/healthcare-ai-cool-demo-trap-moving-poc-to-production/</a></li>
+                    <li id="ref5_spa" class="reference-item">Artkai. "Proof of Concept (PoC) Development Guide." Accessed May 8, 2025. <a href="https://artkai.io/blog/poc-development-guide" target="_blank" rel="noopener noreferrer">https://artkai.io/blog/poc-development-guide</a></li>
+                    <li id="ref6_spa" class="reference-item">EVNE Developers. "Best Practices for Executing a Proof of Concept." Accessed May 8, 2025. <a href="https://evnedev.com/blog/company/best-practices-for-executing-proof-of-concept/" target="_blank" rel="noopener noreferrer">https://evnedev.com/blog/company/best-practices-for-executing-proof-of-concept/</a></li>
+                    <li id="ref7_spa" class="reference-item">Quinnox. "A Proof of Concept (POC) in Software Development." Accessed May 8, 2025. <a href="https://www.quinnox.com/blogs/proof-of-concept-matters-in-software-development/" target="_blank" rel="noopener noreferrer">https://www.quinnox.com/blogs/proof-of-concept-matters-in-software-development/</a></li>
+                    <li id="ref8_spa" class="reference-item">MIT Comm Lab. "Technical Demonstrations : Civil and Environmental Engineering." Accessed May 8, 2025. <a href="https://mitcommlab.mit.edu/cee/commkit/technical-demonstrations/" target="_blank" rel="noopener noreferrer">https://mitcommlab.mit.edu/cee/commkit/technical-demonstrations/</a></li>
+                    <li id="ref9_spa" class="reference-item">SiteSpect. "6 Ways to Improve Your Experimentation Program Management." Accessed May 8, 2025. <a href="https://www.sitespect.com/improve-experimentation-program-management/" target="_blank" rel="noopener noreferrer">https://www.sitespect.com/improve-experimentation-program-management/</a></li>
+                    <li id="ref10_spa" class="reference-item">Addepto. "AI Proof of Concept – Steps and Benefits." Accessed May 8, 2025. <a href="https://addepto.com/blog/ai-proof-of-concept-steps-and-benefits/" target="_blank" rel="noopener noreferrer">https://addepto.com/blog/ai-proof-of-concept-steps-and-benefits/</a></li>
+                    <li id="ref11_spa" class="reference-item">Pecan AI. "Data Preparation for Machine Learning: 5 Best Practices for Better Insights." Accessed May 8, 2025. <a href="https://www.pecan.ai/blog/data-preparation-for-machine-learning-5-best-practices-for-better-insights/" target="_blank" rel="noopener noreferrer">https://www.pecan.ai/blog/data-preparation-for-machine-learning-5-best-practices-for-better-insights/</a></li>
+                    <li id="ref12_spa" class="reference-item">Google for Developers. "Rules of Machine Learning." Accessed May 8, 2025. <a href="https://developers.google.com/machine-learning/guides/rules-of-ml" target="_blank" rel="noopener noreferrer">https://developers.google.com/machine-learning/guides/rules-of-ml</a></li>
+                    <li id="ref13_spa" class="reference-item">Onix-Systems. "POC in Software Development: Driving Innovation." Accessed May 8, 2025. <a href="https://onix-systems.com/blog/the-meaning-and-methods-of-poc-in-software-development" target="_blank" rel="noopener noreferrer">https://onix-systems.com/blog/the-meaning-and-methods-of-poc-in-software-development</a></li>
+                    <li id="ref14_spa" class="reference-item">BigRio. "AI Studio For Healthcare Startups." Accessed May 8, 2025. <a href="https://bigr.io/ai-studio-for-healthcare-startups-2/" target="_blank" rel="noopener noreferrer">https://bigr.io/ai-studio-for-healthcare-startups-2/</a></li>
+                    <li id="ref15_spa" class="reference-item">ClickUp. "How to Manage Software Development Challenges." Accessed May 8, 2025. <a href="https://clickup.com/blog/software-development-challenges/" target="_blank" rel="noopener noreferrer">https://clickup.com/blog/software-development-challenges/</a></li>
+                    <li id="ref16_spa" class="reference-item">VMware Blogs. "Overcoming the Challenges of Delivering Great Software Demos." Accessed May 8, 2025. <a href="https://blogs.vmware.com/cloud/2020/10/27/overcoming-challenges-delivering-great-software-demos/" target="_blank" rel="noopener noreferrer">https://blogs.vmware.com/cloud/2020/10/27/overcoming-challenges-delivering-great-software-demos/</a></li>
+                    <li id="ref17_spa" class="reference-item">Supademo. "The Ultimate Software Demo Presentation Guide." Accessed May 8, 2025. <a href="https://supademo.com/blog/sales/software-demo-presentation/" target="_blank" rel="noopener noreferrer">https://supademo.com/blog/sales/software-demo-presentation/</a></li>
+                    <li id="ref18_spa" class="reference-item">MADX. "SaaS Demo: How to Showcase Your Software Effectively." Accessed May 8, 2025. <a href="https://www.madx.digital/learn/saas-demo" target="_blank" rel="noopener noreferrer">https://www.madx.digital/learn/saas-demo</a></li>
+                    <li id="ref19_spa" class="reference-item">Loom. "Top 6 Sales Demo Software Tools and How to Choose One." Accessed May 8, 2025. <a href="https://www.loom.com/blog/sales-demo-software" target="_blank" rel="noopener noreferrer">https://www.loom.com/blog/sales-demo-software</a></li>
+                    <li id="ref20_spa" class="reference-item">HowdyGo. "Best Interactive Demo Software of 2025 (Full Comparison)." Accessed May 8, 2025. <a href="https://www.howdygo.com/blog/interactive-product-demo-comparison" target="_blank" rel="noopener noreferrer">https://www.howdygo.com/blog/interactive-product-demo-comparison</a></li>
+                    <li id="ref21_spa" class="reference-item">Supademo. "Supademo: AI Interactive Product Demos." Accessed May 8, 2025. <a href="https://supademo.com/" target="_blank" rel="noopener noreferrer">https://supademo.com/</a></li>
+                    <li id="ref22_spa" class="reference-item">TechRadar. "Best screen recorder of 2025." Accessed May 8, 2025. <a href="https://www.techradar.com/best/best-screen-recorders" target="_blank" rel="noopener noreferrer">https://www.techradar.com/best/best-screen-recorders</a></li>
+                    <li id="ref23_spa" class="reference-item">G2. "Best Demo Automation Software: User Reviews from May 2025." Accessed May 8, 2025. <a href="https://www.g2.com/categories/demo-automation" target="_blank" rel="noopener noreferrer">https://www.g2.com/categories/demo-automation</a></li>
+                    <li id="ref24_spa" class="reference-item">Gartner Peer Insights. "Best Interactive Demonstration Applications Reviews 2025." Accessed May 8, 2025. <a href="https://www.gartner.com/reviews/market/interactive-demonstration-applications" target="_blank" rel="noopener noreferrer">https://www.gartner.com/reviews/market/interactive-demonstration-applications</a></li>
+                    <li id="ref25_spa" class="reference-item">Demoboost. "Demo Automation Software: Create Stunning Product Demos." Accessed May 8, 2025. <a href="https://demoboost.com/demo-automation-software" target="_blank" rel="noopener noreferrer">https://demoboost.com/demo-automation-software</a></li>
+                    <li id="ref26_spa" class="reference-item">GoConsensus. "AI Demo Assistant Software | Claraty by Consensus." Accessed May 8, 2025. <a href="https://goconsensus.com/ai-demo-assistant/" target="_blank" rel="noopener noreferrer">https://goconsensus.com/ai-demo-assistant/</a></li>
+                    <li id="ref27_spa" class="reference-item">TrustRadius. "TrustRadius for Vendors." Accessed May 8, 2025. <a href="https://solutions.trustradius.com/" target="_blank" rel="noopener noreferrer">https://solutions.trustradius.com/</a></li>
+                    <li id="ref28_spa" class="reference-item">Imaginarium Agency. "Using G2, Trust Radius, and Capterra with LinkedIn to Drive Sales." Accessed May 8, 2025. <a href="https://www.imaginarium.agency/playbooks/using-g2-trust-radius-and-capterra-with-linkedin-to-drive-sales" target="_blank" rel="noopener noreferrer">https://www.imaginarium.agency/playbooks/using-g2-trust-radius-and-capterra-with-linkedin-to-drive-sales</a></li>
+                    <li id="ref29_spa" class="reference-item">Synthesia. "AI Script Generator | Generate a Script & Make an AI Video." Accessed May 8, 2025. <a href="https://www.synthesia.io/features/ai-script-generator" target="_blank" rel="noopener noreferrer">https://www.synthesia.io/features/ai-script-generator</a></li>
+                    <li id="ref30_spa" class="reference-item">Descript. "Free AI Product Video Maker | Demos & Ads in Minutes." Accessed May 8, 2025. <a href="https://www.descript.com/tools/product-video-maker" target="_blank" rel="noopener noreferrer">https://www.descript.com/tools/product-video-maker</a></li>
+                    <li id="ref31_spa" class="reference-item">Storylane. "Lily AI - Storylane." Accessed May 8, 2025. <a href="https://www.storylane.io/lily-ai" target="_blank" rel="noopener noreferrer">https://www.storylane.io/lily-ai</a></li>
+                    <li id="ref32_spa" class="reference-item">Clueso. "Best Screen Recording Software for 2025 & Beyond: Top Tools." Accessed May 8, 2025. <a href="https://www.clueso.io/solutions/screen-recording-software" target="_blank" rel="noopener noreferrer">https://www.clueso.io/solutions/screen-recording-software</a></li>
+                    <li id="ref33_spa" class="reference-item">Storylane Blog. "Top AI SDR Tools for 2025 (+Reviewed by a Sales Rep)." Accessed May 8, 2025. <a href="https://www.storylane.io/blog/top-ai-sdr-tools" target="_blank" rel="noopener noreferrer">https://www.storylane.io/blog/top-ai-sdr-tools</a></li>
+                    <li id="ref34_spa" class="reference-item">Zebracat AI. "My Honest Review of Synthesia." Accessed May 8, 2025. <a href="https://www.zebracat.ai/post/synthesia-review" target="_blank" rel="noopener noreferrer">https://www.zebracat.ai/post/synthesia-review</a></li>
+                    <li id="ref35_spa" class="reference-item">Storylane Blog. "Introducing Lily: Your Demo Automation Agent." Accessed May 8, 2025. <a href="https://www.storylane.io/blog/introducing-lily-your-demo-automation-agent" target="_blank" rel="noopener noreferrer">https://www.storylane.io/blog/introducing-lily-your-demo-automation-agent</a></li>
+                    <li id="ref36_spa" class="reference-item">Zebracat AI. "An Honest Review of Pictory." Accessed May 8, 2025. <a href="https://www.zebracat.ai/post/i-tested-pictory" target="_blank" rel="noopener noreferrer">https://www.zebracat.ai/post/i-tested-pictory</a></li>
+                    <li id="ref37_spa" class="reference-item">Murf AI. "Pros and Cons of AI Dubbing: Advantages and Limitations." Accessed May 8, 2025. <a href="https://murf.ai/blog/ai-voice-dubbing-pros-and-cons" target="_blank" rel="noopener noreferrer">https://murf.ai/blog/ai-voice-dubbing-pros-and-cons</a></li>
+                    <li id="ref38_spa" class="reference-item">YouTube (googleusercontent). "LLMs on Air: Gen AI Use Cases for News, Sports, and Entertainment." Accessed May 8, 2025. <a href="https://www.youtube.com/watch?v=_Da3Z6_JUz4" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=_Da3Z6_JUz4</a></li>
+                    <li id="ref39_spa" class="reference-item">Unite.AI. "Synthesia Review: The #1 AI Video Generator in May 2025?" Accessed May 8, 2025. <a href="https://www.unite.ai/synthesia-review/" target="_blank" rel="noopener noreferrer">https://www.unite.ai/synthesia-review/</a></li>
+                    <li id="ref40_spa" class="reference-item">Synthesia. "How a LinkedIn creator used a personal avatar to hit 60M+ video views faster." Accessed May 8, 2025. <a href="https://www.synthesia.io/case-studies/ruben-hassid" target="_blank" rel="noopener noreferrer">https://www.synthesia.io/case-studies/ruben-hassid</a></li>
+                    <li id="ref41_spa" class="reference-item">Descript. "Free case study video maker." Accessed May 8, 2025. <a href="https://www.descript.com/video-generator/case-study-video" target="_blank" rel="noopener noreferrer">https://www.descript.com/video-generator/case-study-video</a></li>
+                    <li id="ref42_spa" class="reference-item">Descript. "Marketing & Case Study Videos, Easy as Typing." Accessed May 8, 2025. <a href="https://www.descript.com/use-case/case-studies" target="_blank" rel="noopener noreferrer">https://www.descript.com/use-case/case-studies</a></li>
+                    <li id="ref43_spa" class="reference-item">ACCELQ. "Top 10 Generative AI Testing Tools In 2025." Accessed May 8, 2025. <a href="https://www.accelq.com/blog/generative-ai-testing-tools/" target="_blank" rel="noopener noreferrer">https://www.accelq.com/blog/generative-ai-testing-tools/</a></li>
+                    <li id="ref44_spa" class="reference-item">LambdaTest. "Building and Testing AI-Agent Powered LLM Applications: A Live Demonstration." Accessed May 8, 2025. <a href="https://www.lambdatest.com/video/building-and-testing-ai-agent-powered-llm-applications-a-live-demonstration" target="_blank" rel="noopener noreferrer">https://www.lambdatest.com/video/building-and-testing-ai-agent-powered-llm-applications-a-live-demonstration</a></li>
+                    <li id="ref45_spa" class="reference-item">Uizard. "Uizard: UI Design Made Easy, Powered By AI." Accessed May 8, 2025. <a href="https://uizard.io/" target="_blank" rel="noopener noreferrer">https://uizard.io/</a></li>
+                    <li id="ref46_spa" class="reference-item">UXPin. "15 AI Tools for Designers in 2025." Accessed May 8, 2025. <a href="https://www.uxpin.com/studio/blog/ai-tools-for-designers/" target="_blank" rel="noopener noreferrer">https://www.uxpin.com/studio/blog/ai-tools-for-designers/</a></li>
+                    <li id="ref47_spa" class="reference-item">Attention Insight. "The Role of AI in UI/UX Design." Accessed May 8, 2025. <a href="https://attentioninsight.com/using-ai-to-automatically-generate-and-optimize-ui-ux-designs-a-new-frontier-in-software-development/" target="_blank" rel="noopener noreferrer">https://attentioninsight.com/using-ai-to-automatically-generate-and-optimize-ui-ux-designs-a-new-frontier-in-software-development/</a></li>
+                    <li id="ref48_spa" class="reference-item">Applitools. "Applitools - AI-Powered End-to-End Testing." Accessed May 8, 2025. <a href="https://applitools.com/" target="_blank" rel="noopener noreferrer">https://applitools.com/</a></li>
+                    <li id="ref49_spa" class="reference-item">Mayfield. "LLM-powered Developer Automation." Accessed May 8, 2025. <a href="https://www.mayfield.com/llm-powered-developer-automation/" target="_blank" rel="noopener noreferrer">https://www.mayfield.com/llm-powered-developer-automation/</a></li>
+                    <li id="ref50_spa" class="reference-item">YouTube (googleusercontent). "LLM generates the ENTIRE output at once (world's first diffusion LLM)." Accessed May 8, 2025. <a href="https://www.youtube.com/watch?v=X1rD3NhlIcE" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=X1rD3NhlIcE</a></li>
+                    <li id="ref51_spa" class="reference-item">YouTube (googleusercontent). "How LLMs Are Changing Every Job (And What You Can Do About It)." Accessed May 8, 2025. <a href="https://www.youtube.com/watch?v=1iHJGTlyDqc" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=1iHJGTlyDqc</a></li>
+                    <li id="ref52_spa" class="reference-item">YouTube (googleusercontent). "How Large Language Models (LLMs) Actually Work." Accessed May 8, 2025. <a href="https://m.youtube.com/watch?v=OyfiYTzMhAc" target="_blank" rel="noopener noreferrer">https://m.youtube.com/watch?v=OyfiYTzMhAc</a></li>
+                    <li id="ref53_spa" class="reference-item">Google Cloud. "Large Language Models (LLMs) with Google AI." Accessed May 8, 2025. <a href="https://cloud.google.com/ai/llms" target="_blank" rel="noopener noreferrer">https://cloud.google.com/ai/llms</a></li>
+                    <li id="ref54_spa" class="reference-item">YouTube (googleusercontent). "Lessons From A Year Building With LLMs." Accessed May 8, 2025. <a href="https://www.youtube.com/watch?v=qBHfQT3YtyY" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=qBHfQT3YtyY</a></li>
+                    <li id="ref55_spa" class="reference-item">YouTube (googleusercontent). "Analyzing YouTube Videos with an LLM (API-Based, No-Code)." Accessed May 8, 2025. <a href="https://m.youtube.com/watch?v=rkCABjd9uKE" target="_blank" rel="noopener noreferrer">https://m.youtube.com/watch?v=rkCABjd9uKE</a></li>
+                    <li id="ref56_spa" class="reference-item">YouTube (googleusercontent). "Episode 35 - The impact of LLMs in software development with Dave Thomas." Accessed May 8, 2025. <a href="https://www.youtube.com/watch?v=sVmtObghDak" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=sVmtObghDak</a></li>
+                    <li id="ref57_spa" class="reference-item">Firework. "Increasing Sales with AI Video: Proven Strategies Being." Accessed May 8, 2025. <a href="https://firework.com/blog/brands-using-ai-video-creation-drive-sales" target="_blank" rel="noopener noreferrer">https://firework.com/blog/brands-using-ai-video-creation-drive-sales</a></li>
+                    <li id="ref58_spa" class="reference-item">Videotok. "How AI UGC avatars boost your SEO and engagement." Accessed May 8, 2025. <a href="https://www.videotok.app/blog/ai-avatars/how-ai-ugc-avatars-boost-your-seo-and-engagement" target="_blank" rel="noopener noreferrer">https://www.videotok.app/blog/ai-avatars/how-ai-ugc-avatars-boost-your-seo-and-engagement</a></li>
+                    <li id="ref59_spa" class="reference-item">YouTube (googleusercontent). "Generative AI And Computer Coding." Accessed May 8, 2025. <a href="https://www.youtube.com/watch?v=YTxGZZToTsw" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=YTxGZZToTsw</a></li>
+                    <li id="ref60_spa" class="reference-item">YouTube (googleusercontent). "The future of generative AI with Upland Qvidian | Book your demo today!" Accessed May 8, 2025. <a href="https://www.youtube.com/watch?v=ousLfKC2KB0" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=ousLfKC2KB0</a></li>
+                    <li id="ref61_spa" class="reference-item">YouTube (googleusercontent). "AI Video Tools You Won't Believe Are FREE!" Accessed May 8, 2025. <a href="https://www.youtube.com/watch?v=LqF4fXN5XNk" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=LqF4fXN5XNk</a></li>
+                    <li id="ref62_spa" class="reference-item">YouTube (googleusercontent). "This AI Agent Analyses Videos Brilliantly (5 Easy Examples You Can Try)." Accessed May 8, 2025. <a href="https://www.youtube.com/watch?v=n3u5EcjRmdY" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=n3u5EcjRmdY</a></li>
+                    <li id="ref63_spa" class="reference-item">ResearchGate. "Making AI-Enhanced Videos: Analyzing Generative AI Use Cases in YouTube Content Creation." Accessed May 8, 2025. <a href="https://www.researchgate.net/publication/389616955_Making_AI-Enhanced_Videos_Analyzing_Generative_AI_Use_Cases_in_YouTube_Content_Creation" target="_blank" rel="noopener noreferrer">https://www.researchgate.net/publication/389616955_Making_AI-Enhanced_Videos_Analyzing_Generative_AI_Use_Cases_in_YouTube_Content_Creation</a></li>
+                    <li id="ref64_spa" class="reference-item">Grand View Research. "Generative AI In Content Creation Market Size Report, 2030." Accessed May 8, 2025. <a href="https://www.grandviewresearch.com/industry-analysis/generative-ai-content-creation-market-report" target="_blank" rel="noopener noreferrer">https://www.grandviewresearch.com/industry-analysis/generative-ai-content-creation-market-report</a></li>
+                    <li id="ref65_spa" class="reference-item">Simplified. "Top 5 AI Youtube Shorts Generator in 2025." Accessed May 8, 2025. <a href="https://simplified.com/blog/ai-video/youtube-shorts-generators" target="_blank" rel="noopener noreferrer">https://simplified.com/blog/ai-video/youtube-shorts-generators</a></li>
+                    <li id="ref66_spa" class="reference-item">YouTube (googleusercontent). "Pictory AI Review 2025 (The Best AI Video Tool?)." Accessed May 8, 2025. <a href="https://www.youtube.com/watch?v=dMgqqQmF_8A" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=dMgqqQmF_8A</a></li>
+                    <li id="ref67_spa" class="reference-item">YouTube (googleusercontent). "Should You Use Open Source Large Language Models?" Accessed May 8, 2025. <a href="https://www.youtube.com/watch?v=y9k-U9AuDeM" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=y9k-U9AuDeM</a></li>
+                    <li id="ref68_spa" class="reference-item">web.dev. "Benefits and limits of large language models." Accessed May 8, 2025. <a href="https://web.dev/articles/ai-llms-benefits" target="_blank" rel="noopener noreferrer">https://web.dev/articles/ai-llms-benefits</a></li>
+                    <li id="ref69_spa" class="reference-item">QuickCreator. "Using AI to Write Content for Sales Demos." Accessed May 8, 2025. <a href="https://quickcreator.io/blog/using-ai-for-sales-demo-content/" target="_blank" rel="noopener noreferrer">https://quickcreator.io/blog/using-ai-for-sales-demo-content/</a></li>
+                    <li id="ref70_spa" class="reference-item">Kill the DJ. "Are Listeners Ready for AI in Audio? A New Study Weighs In." Accessed May 8, 2025. <a href="https://killthedj.com/are-listeners-ready-for-ai-in-audio-a-new-study-weighs-in/" target="_blank" rel="noopener noreferrer">https://killthedj.com/are-listeners-ready-for-ai-in-audio-a-new-study-weighs-in/</a></li>
+                    <li id="ref71_spa" class="reference-item">ZenML. "LLMOps in Production: 457 Case Studies of What Actually Works." Accessed May 8, 2025. <a href="https://www.zenml.io/blog/llmops-in-production-457-case-studies-of-what-actually-works" target="_blank" rel="noopener noreferrer">https://www.zenml.io/blog/llmops-in-production-457-case-studies-of-what-actually-works</a></li>
+                    <li id="ref72_spa" class="reference-item">Matrix Marketing Group. "AI-Driven Case Studies: Streamline Content Creation Heading in 2025." Accessed May 8, 2025. <a href="https://matrixmarketinggroup.com/2025-ai-driven-case-studies/" target="_blank" rel="noopener noreferrer">https://matrixmarketinggroup.com/2025-ai-driven-case-studies/</a></li>
+                    <li id="ref73_spa" class="reference-item">Swarmia. "Measuring the productivity impact of AI coding tools." Accessed May 8, 2025. <a href="https://www.swarmia.com/blog/productivity-impact-of-ai-coding-tools/" target="_blank" rel="noopener noreferrer">https://www.swarmia.com/blog/productivity-impact-of-ai-coding-tools/</a></li>
+                    <li id="ref74_spa" class="reference-item">Google Cloud Blog. "KPIs for gen AI: Measuring your AI success." Accessed May 8, 2025. <a href="https://cloud.google.com/transform/gen-ai-kpis-measuring-ai-success-deep-dive" target="_blank" rel="noopener noreferrer">https://cloud.google.com/transform/gen-ai-kpis-measuring-ai-success-deep-dive</a></li>
+                    <li id="ref75_spa" class="reference-item">Mozzaik365. "What is the return on investment (ROI) of generative AI in business?" Accessed May 8, 2025. <a href="https://www.mozzaik365.com/generative-ai/roi-of-generative-ai" target="_blank" rel="noopener noreferrer">https://www.mozzaik365.com/generative-ai/roi-of-generative-ai</a></li>
+                    <li id="ref76_spa" class="reference-item">HRDQ-U. "Why Measuring AI ROI Matters." Accessed May 8, 2025. <a href="https://hrdqu.com/roi-training/why-measuring-ai-roi-matters/" target="_blank" rel="noopener noreferrer">https://hrdqu.com/roi-training/why-measuring-ai-roi-matters/</a></li>
+                    <li id="ref77_spa" class="reference-item">lakeFS. "LLM Observability Tools: 2025 Comparison." Accessed May 8, 2025. <a href="https://lakefs.io/blog/llm-observability-tools/" target="_blank" rel="noopener noreferrer">https://lakefs.io/blog/llm-observability-tools/</a></li>
+                    <li id="ref78_spa" class="reference-item">Litslink. "AI in Software Development: Key Challenges You Can't Ignore." Accessed May 8, 2025. <a href="https://litslink.com/blog/the-impact-of-ai-on-software-development-with-key-opportunities-and-challenges" target="_blank" rel="noopener noreferrer">https://litslink.com/blog/the-impact-of-ai-on-software-development-with-key-opportunities-and-challenges</a></li>
+                    <li id="ref79_spa" class="reference-item">Bursztein, Elie. "Understanding How Creators Experience and Cope with Hate and Harassment Online." Accessed May 8, 2025. <a href="https://elie.net/static/files/it-s-common-and-a-part-of-being-a-content-creator-understanding-how-creators-experience-and-cope-with-hate-and-harassment-online/it-s-common-and-a-part-of-being-a-content-creator-understanding-how-creators-experience-and-cope-with-hate-and-harassment-online.pdf" target="_blank" rel="noopener noreferrer">PDF Link</a></li>
+                    <li id="ref80_spa" class="reference-item">Talent500. "LLMs in Software Development: Code Easier & Faster." Accessed May 8, 2025. <a href="https://talent500.com/blog/llms-for-software-development/" target="_blank" rel="noopener noreferrer">https://talent500.com/blog/llms-for-software-development/</a></li>
+                    <li id="ref81_spa" class="reference-item">arXiv (2504.19678). "From LLM Reasoning to Autonomous AI Agents: A Comprehensive Review." Accessed May 8, 2025. <a href="https://arxiv.org/abs/2504.19678" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2504.19678</a></li>
+                    <li id="ref82_spa" class="reference-item">arXiv (2409.14506v2). "InteLiPlan: An Interactive Lightweight LLM-Based Planner for Domestic Robot Autonomy." Accessed May 8, 2025. <a href="https://arxiv.org/html/2409.14506v2" target="_blank" rel="noopener noreferrer">https://arxiv.org/html/2409.14506v2</a></li>
+                </ol>
+            </div>
+        </section>
+
     </main>
 
     <footer class="bg-white border-t border-stone-200 mt-12 py-8 text-center">
@@ -519,7 +548,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Mobile menu toggle
             const menuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             if (menuButton && mobileMenu) {
@@ -529,18 +557,23 @@
                 });
             }
 
-            // Smooth scrolling for nav links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
                     const targetId = this.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth'
+                        // Offset for fixed header
+                        const headerOffset = document.querySelector('header').offsetHeight || 0;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset - 20; // 20px extra padding
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth"
                         });
-                        // Close mobile menu on link click
-                        if (!mobileMenu.classList.contains('hidden')) {
+                        
+                        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                             mobileMenu.classList.add('hidden');
                             menuButton.querySelectorAll('svg').forEach(svg => svg.classList.toggle('hidden'));
                         }
@@ -548,7 +581,6 @@
                 });
             });
 
-            // Accordion functionality
             document.querySelectorAll('.accordion-button').forEach(button => {
                 button.addEventListener('click', () => {
                     const content = document.getElementById(button.dataset.target);
@@ -561,24 +593,26 @@
                 });
             });
 
-            // Active nav link highlighting on scroll
             const sections = document.querySelectorAll('.content-section');
-            const navLinks = document.querySelectorAll('nav a.nav-link');
+            const navLinks = document.querySelectorAll('header nav a.nav-link'); 
 
             function changeLinkState() {
                 let index = sections.length;
-                while(--index && window.scrollY + 100 < sections[index].offsetTop) {} // Add offset
+                const headerHeight = document.querySelector('header').offsetHeight || 0;
+                
+                while(--index >= 0 && window.scrollY + headerHeight + 50 < sections[index].offsetTop) {} // Adjusted offset for accuracy
                 
                 navLinks.forEach((link) => link.classList.remove('active'));
-                // Check if a corresponding link exists before trying to add 'active' class
-                if (navLinks[index]) {
+                if (index >= 0 && navLinks[index]) { 
                      navLinks[index].classList.add('active');
                 }
             }
-            changeLinkState(); // Initial check
-            window.addEventListener('scroll', changeLinkState);
+            
+            if (sections.length > 0 && navLinks.length > 0) {
+                changeLinkState(); 
+                window.addEventListener('scroll', changeLinkState);
+            }
 
-            // Fade in sections on scroll
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
@@ -588,8 +622,8 @@
             const observerCallback = (entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('fade-in-visible'); // Add a class to mark as animated
-                        observer.unobserve(entry.target); // Optional: stop observing after animation
+                        entry.target.classList.add('fade-in-visible'); 
+                        observer.unobserve(entry.target); 
                     }
                 });
             };
@@ -598,7 +632,7 @@
             document.querySelectorAll('.content-section.fade-in').forEach(section => {
                 intersectionObserver.observe(section);
             });
-             // Style adjustments for fade-in to be visible
+            
             const style = document.createElement('style');
             style.innerHTML = `
                 .content-section.fade-in {
@@ -612,7 +646,6 @@
                 }
             `;
             document.head.appendChild(style);
-
         });
     </script>
 

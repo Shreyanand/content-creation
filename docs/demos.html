@@ -8,12 +8,13 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Visualization & Content Choices:
         - Report Info: Executive Summary -> Goal: Introduce -> Method: Formatted text -> Interaction: Static -> Justification: Sets context.
-        - Report Info: PoC Definition/Best Practices/Pitfalls (Sec II, Table 1) -> Goal: Inform, Compare, Generate -> Method: Text, HTML Table, Chart.js for stats, Gemini API for PoC Success Tips (with API key input modal if key is missing) -> Interaction: Scroll, Read, View Chart, Click button for AI tips -> Justification: Clear presentation, enhanced with dynamic AI-generated advice and user-friendly API key handling.
+        - Report Info: PoC Definition/Best Practices/Pitfalls (Sec II, Table 1) -> Goal: Inform, Compare, Generate -> Method: Text, HTML Table, Chart.js for stats, Gemini API for PoC Success Tips (takes software type input, with API key input modal if key is missing) -> Interaction: Scroll, Read, View Chart, Input software type, Click button for AI tips -> Justification: Clear presentation, enhanced with dynamic, context-specific AI-generated advice and user-friendly API key handling.
         - Report Info: Crafting Demos (Sec III) -> Goal: Inform, Generate -> Method: Text, Lists, Gemini API for Storytelling Ideas (with API key input modal if key is missing) -> Interaction: Read, Input software type, Click button for AI ideas -> Justification: Presents principles, augmented with creative AI-generated narrative suggestions and user-friendly API key handling.
         - Report Info: Demo Tool Categories (Sec IV, Table 2) -> Goal: Compare, Inform -> Method: HTML Table -> Interaction: Read, Compare entries -> Justification: Structured comparison.
         - Report Info: LLM Revolution (Sec V, Table 3, Case Studies) -> Goal: Inform, Showcase -> Method: Text, HTML Table, Clickable Cards/Sections for case studies -> Interaction: Read, Compare, Navigate sub-content -> Justification: Handles dense info with varied presentation.
         - Report Info: Learnings & Ethics (Sec VI) -> Goal: Inform, Highlight -> Method: Text, Lists -> Interaction: Read -> Justification: Emphasizes key takeaways.
         - Report Info: Future & Recommendations (Sec VII, VIII) -> Goal: Inform, Guide -> Method: Text, Lists -> Interaction: Read -> Justification: Forward-looking and actionable advice.
+        - Report Info: References (Sec IX of source doc) -> Goal: Attribute Sources -> Method: Formatted ordered list -> Interaction: Read, Scroll -> Justification: Provides credibility and allows users to consult original sources.
         - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. All charts via Chart.js (Canvas). Diagrams via HTML/CSS/Tailwind. LLM interactions via Gemini API.
     -->
     <style>
@@ -162,6 +163,15 @@
             width: 90%;
             max-width: 500px;
         }
+        .reference-list li {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+            padding-left: 0.5rem;
+        }
+        .reference-list li::marker {
+            font-weight: 500;
+            color: #0F766E; /* teal-700 */
+        }
     </style>
 </head>
 <body class="bg-amber-50 text-neutral-800 antialiased">
@@ -182,6 +192,7 @@
                         <a href="#learnings" class="nav-link">Learnings</a>
                         <a href="#future" class="nav-link">Future</a>
                         <a href="#recommendations" class="nav-link">Recommendations</a>
+                        <a href="#references" class="nav-link">References</a>
                     </div>
                 </div>
                 <div class="md:hidden">
@@ -205,8 +216,16 @@
                 <a href="#learnings" class="nav-link block">Learnings</a>
                 <a href="#future" class="nav-link block">Future</a>
                 <a href="#recommendations" class="nav-link block">Recommendations</a>
+                <a href="#references" class="nav-link block">References</a>
             </div>
         </nav>
+        <div class="bg-teal-50 border-b border-teal-200 py-3 px-4 flex items-center justify-center">
+            <span class="mr-3 text-teal-800 font-medium">🎧 Listen to the podcast version:</span>
+            <audio controls class="align-middle h-8">
+                <source src="../demos.wav" type="audio/wav">
+                Your browser does not support the audio element. <a href="../demos.wav" class="text-teal-700 underline">Download here</a>.
+            </audio>
+        </div>
     </header>
 
     <main class="container mx-auto p-4 sm:p-6 lg:p-8">
@@ -230,7 +249,11 @@
             
             <div class="card my-6">
                 <h3 class="subsection-title text-teal-700">✨ AI-Powered PoC Insights</h3>
-                <p class="mb-3 text-neutral-600">Need quick advice for your next PoC? Let AI help you brainstorm key success factors.</p>
+                <p class="mb-3 text-neutral-600">Need quick advice for your next PoC? Describe your software or key feature and let AI help you brainstorm success factors.</p>
+                <div class="mb-3">
+                    <label for="pocSoftwareTypeInput" class="block text-sm font-medium text-neutral-700 mb-1">Software Type / Key Feature (optional):</label>
+                    <input type="text" id="pocSoftwareTypeInput" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm" placeholder="e.g., AI-driven analytics platform, real-time collaboration tool">
+                </div>
                 <button id="generatePocTipsButton" class="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-4 rounded-md inline-flex items-center transition duration-150 ease-in-out">
                     <span id="pocTipsButtonText">✨ Get AI PoC Success Tips</span>
                     <span id="pocTipsLoadingSpinner" class="loading-spinner content-hidden ml-2"></span>
@@ -769,6 +792,100 @@
             </div>
              <p class="mt-8 text-center text-neutral-600">The future of software demonstration lies in harnessing new technologies, including AI, to communicate value with greater precision, engagement, and impact.</p>
         </section>
+
+        <section id="references" class="content-section content-hidden min-h-screen pt-8">
+            <h1 class="section-title">References</h1>
+            <div class="card">
+                <ol class="list-decimal list-inside space-y-3 reference-list text-neutral-700">
+                    <li>Simplilearn. (2023, October 20). *What Is A Proof Of Concept (POC)? Definition, Importance, and Example*.</li>
+                    <li>UserGuiding. (n.d.). *Proof of Concept (PoC): Meaning, Process, and Best Practices*.</li>
+                    <li>Google Cloud. (n.d.). *AI proof of concept (PoC)*.</li>
+                    <li>MobiDev. (2023, November 20). *AI in Healthcare: How to Run a Successful Proof of Concept*.</li>
+                    <li>Maruti Techlabs. (2024, January 23). *Proof of Concept: What It Is & How to Create One?*</li>
+                    <li>Atlassian. (n.d.). *Proof of concept*.</li>
+                    <li>Adobe Workfront. (n.d.). *Proof of concept: A complete guide*.</li>
+                    <li>Nature. (n.d.). *How to give a stunning scientific presentation*.</li>
+                    <li>Harvard Business Review. (2014, September 1). *A Refresher on A/B Testing*.</li>
+                    <li>Databricks. (n.d.). *AI Proof of Concept*.</li>
+                    <li>AWS. (n.d.). *What is a Proof of Concept (POC) in AI?*</li>
+                    <li>Towards Data Science. (2020, August 3). *The AI Proof Of Concept (PoC) — A Short Guide*.</li>
+                    <li>Net Solutions. (2023, July 19). *Proof of Concept (PoC) in AI: A Guide to Successful Implementation*.</li>
+                    <li>InData Labs. (2023, August 29). *AI Proof of Concept: How to Test Your AI Idea*.</li>
+                    <li>Celonis. (n.d.). *Proof of Concept (PoC)*.</li>
+                    <li>VMware Learning Platform. (n.d.). *Proof of Concept Environment*.</li>
+                    <li>Walnut.io. (n.d.). *How to Give a Great Software Demo: Tips & Tricks*.</li>
+                    <li>Storylane. (2023, November 27). *10 Software Demo Best Practices to Win More Deals*.</li>
+                    <li>TestBox. (n.d.). *The Ultimate Guide to Demo Software*.</li>
+                    <li>Navattic. (n.d.). *Interactive Product Demo Software*.</li>
+                    <li>Supademo. (n.d.). *Create Interactive Product Demos with AI*.</li>
+                    <li>TechSmith. (2023, July 18). *11 Best Screen Recorders for Any Use Case (2024)*.</li>
+                    <li>G2. (n.d.). *Best Demo Automation Software*. (Accessed May 2024).</li>
+                    <li>Reprise. (n.d.). *Demo Creation Platform*.</li>
+                    <li>Demoboost. (n.d.). *Demoboost - The Demo Experience Platform*.</li>
+                    <li>Consensus. (n.d.). *Meet Claraty - Your AI Demo Assistant*.</li>
+                    <li>TrustRadius. (n.d.). *About Us*.</li>
+                    <li>UserEvidence. (2023, August 10). *G2 vs TrustRadius vs Capterra: Which is Best for B2B SaaS?*</li>
+                    <li>Synthesia. (n.d.). *AI Script Generator*.</li>
+                    <li>Descript. (n.d.). *Write with AI*.</li>
+                    <li>Storylane. (n.d.). *Lily AI*.</li>
+                    <li>Clueso. (n.d.). *AI Powered Video & Document Generator*.</li>
+                    <li>Storylane. (n.d.). *AI HTML Editor*.</li>
+                    <li>Synthesia. (n.d.). *AI Video Generator*.</li>
+                    <li>Storylane. (n.d.). *Create Interactive Demos with AI*.</li>
+                    <li>Startup Bonsai. (2024, May 1). *Pictory.AI Review: Is It The Best AI Video Generator?*</li>
+                    <li>Voices.com. (2023, August 29). *AI Voice Generators: The Complete Guide*.</li>
+                    <li>LinkedIn News. (2023, August 1). *How Generative AI Is Changing Video*.</li>
+                    <li>Synthesia. (n.d.). *Ethical AI*.</li>
+                    <li>Synthesia. (n.d.). *Ruben Hassid - Synthesia Case Study*.</li>
+                    <li>Descript. (n.d.). *Product Overview*.</li>
+                    <li>Descript. (n.d.). *AI Features*.</li>
+                    <li>ACCELQ. (n.d.). *ACCELQ Autopilot - Generative AI for Test Automation*.</li>
+                    <li>LambdaTest. (n.d.). *KaneAI - Generative AI Test Automation*.</li>
+                    <li>Uizard. (n.d.). *AI Design Tool for UI*.</li>
+                    <li>UXPin. (n.d.). *AI Component Creator*.</li>
+                    <li>Galileo AI. (n.d.). *AI UI Generation Platform*.</li>
+                    <li>Applitools. (n.d.). *Visual AI*.</li>
+                    <li>SoftwareTestingHelp. (2024, May 13). *15 BEST AI Code Documentation Generator Tools In 2024*.</li>
+                    <li>Hugging Face. (n.d.). *Diffusion Models*.</li>
+                    <li>Google Cloud Blog. (2023, August 29). *How generative AI is changing the way people create*.</li>
+                    <li>NVIDIA Blogs. (2023, March 22). *What Is Generative AI?*</li>
+                    <li>IBM Technology. (n.d.). *What is generative AI?*</li>
+                    <li>McKinsey & Company. (2023, June 14). *What is generative AI?*</li>
+                    <li>YouTube Blog. (2023, October 26). *Testing New AI Features in YouTube*.</li>
+                    <li>TechCrunch. (2023, November 2). *YouTube is testing an AI tool that summarizes videos*.</li>
+                    <li>Firework. (n.d.). *AI Powered Video*.</li>
+                    <li>Videotok. (n.d.). *AI UGC Avatars*.</li>
+                    <li>Microsoft WorkLab. (2023, March 22). *The Future of Work with AI*.</li>
+                    <li>TubeBuddy Blog. (2023, December 14). *How to Use AI for YouTube Content Creation*.</li>
+                    <li>Sprout Social. (2024, February 20). *How to use AI for YouTube content creation*.</li>
+                    <li>Google AI Blog. (2023, October 26). *Bringing More AI-powered Features to YouTube*.</li>
+                    <li>VidIQ Blog. (2023, September 20). *YouTube AI Tools: The Ultimate Guide*.</li>
+                    <li>Gartner. (2023, October 11). *Gartner Identifies Top Trends in Generative AI for 2024*.</li>
+                    <li>HubSpot Blog. (2024, March 1). *How to Use AI on YouTube*.</li>
+                    <li>Pictory.AI. (n.d.). *AI Video Generator*.</li>
+                    <li>Salesforce. (n.d.). *What Is Generative AI? Understanding the Technology and Its Impact*.</li>
+                    <li>ZDNet. (2023, August 28). *What is generative AI and why is it so popular? Here's everything you need to know*.</li>
+                    <li>Walnut.io. (n.d.). *The Impact of AI on Software Demos*.</li>
+                    <li>NuVoodoo Media Services. (2023, July 19). *AI In Audio: Listeners Prefer Human Hosts, Even With Lower Quality*.</li>
+                    <li>ZenML Blog. (2023, October 26). *457 LLMOps Case Studies: What We Learned*.</li>
+                    <li>Harvard Business Review. (2023, July-August). *Generative AI Is Here. Who Should Control It?*</li>
+                    <li>MIT Sloan Management Review. (2023, August 23). *Measuring the Elusive ROI of Generative AI*.</li>
+                    <li>Arize AI. (n.d.). *Monitoring Generative AI: Key Metrics and Best Practices*.</li>
+                    <li>PwC. (n.d.). *Generative AI: The new ROI calculator*.</li>
+                    <li>BCG. (2023, May 10). *How to Get a Real ROI on Generative AI*.</li>
+                    <li>AI Weirdness. (n.d.). *Hallucinations*.</li>
+                    <li>Brookings Institution. (2023, May 23). *AI and the Future of Work: Examining the Impact of Generative AI*.</li>
+                    <li>The Verge. (2023, November 16). *YouTube will require creators to label AI-generated content that looks realistic*.</li>
+                    <li>GitHub Copilot. (n.d.).</li>
+                    <li>Mintlify. (n.d.). *AI Powered Documentation*.</li>
+                    <li>Blox. (n.d.). *AI Documentation Writer*.</li>
+                    <li>Clueso - Product Hunt. (n.d.). *Clueso - AI powered video & document generator.*</li>
+                    <li>Clueso - Features. (n.d.). *Clueso Features Page.*</li>
+                </ol>
+            </div>
+        </section>
+
+
     </main>
 
     <footer class="bg-neutral-800 text-amber-50 text-center p-6 mt-12">
@@ -801,12 +918,13 @@
 
             // Gemini API Interaction Elements
             const generatePocTipsButton = document.getElementById('generatePocTipsButton');
+            const pocSoftwareTypeInput = document.getElementById('pocSoftwareTypeInput'); // New input for PoC tips
             const pocTipsOutput = document.getElementById('pocTipsOutput');
             const pocTipsButtonText = document.getElementById('pocTipsButtonText');
             const pocTipsLoadingSpinner = document.getElementById('pocTipsLoadingSpinner');
 
             const generateStoryButton = document.getElementById('generateStoryButton');
-            const softwareTypeInput = document.getElementById('softwareTypeInput');
+            const softwareTypeInput = document.getElementById('softwareTypeInput'); // Existing input for storytelling
             const storyOutput = document.getElementById('storyOutput');
             const storyButtonText = document.getElementById('storyButtonText');
             const storyLoadingSpinner = document.getElementById('storyLoadingSpinner');
@@ -855,7 +973,6 @@
                 cancelApiKeyButton.addEventListener('click', hideApiKeyModal);
             }
             
-            // Close modal if user clicks outside of it
             if (apiKeyModal) {
                 apiKeyModal.addEventListener('click', function(event) {
                     if (event.target === apiKeyModal) {
@@ -866,12 +983,11 @@
 
 
             async function callGeminiAPI(prompt, outputElement, buttonTextElement, loadingSpinnerElement, originalButtonText) {
-                // Check for API key before proceeding
                 if (!apiKey) {
                     showApiKeyModal(() => callGeminiAPI(prompt, outputElement, buttonTextElement, loadingSpinnerElement, originalButtonText));
                     outputElement.textContent = "Gemini API key is missing. Please provide it in the dialog.";
                     outputElement.classList.remove('content-hidden');
-                    return; // Stop further execution until key is provided
+                    return; 
                 }
 
                 outputElement.classList.add('content-hidden');
@@ -881,7 +997,6 @@
 
                 let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
                 const payload = { contents: chatHistory };
-                // Use the globally stored apiKey
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
                 try {
@@ -899,13 +1014,12 @@
                         }
                         if (response.status === 400 && errorData?.error?.message.toLowerCase().includes("api key not valid")) {
                             outputElement.textContent = 'The provided API Key is not valid. Please check and try again.';
-                            apiKey = ""; // Reset invalid key
+                            apiKey = ""; 
                             showApiKeyModal(() => callGeminiAPI(prompt, outputElement, buttonTextElement, loadingSpinnerElement, originalButtonText));
                         } else {
                            outputElement.textContent = errorMessage;
                         }
                         outputElement.classList.remove('content-hidden');
-                        // Do not throw here, just display error and reset button
                     } else {
                         const result = await response.json();
                         if (result.candidates && result.candidates.length > 0 &&
@@ -931,22 +1045,28 @@
 
             if (generatePocTipsButton) {
                 generatePocTipsButton.addEventListener('click', async () => {
-                    const prompt = "Generate 5 concise, actionable tips for ensuring a successful Proof of Concept (PoC) for a new technology. Focus on clarity, stakeholder alignment, defining success, and risk mitigation. Present as a numbered list.";
+                    const softwareForPoc = pocSoftwareTypeInput.value.trim();
+                    let prompt;
+                    if (softwareForPoc) {
+                         prompt = `Generate 5 concise, actionable tips for ensuring a successful Proof of Concept (PoC) specifically for a new technology related to '${softwareForPoc}'. Focus on clarity, stakeholder alignment, defining success, risk mitigation, and any unique considerations for '${softwareForPoc}'. Present as a numbered list.`;
+                    } else {
+                        prompt = "Generate 5 concise, actionable tips for ensuring a successful Proof of Concept (PoC) for a new technology. Focus on clarity, stakeholder alignment, defining success, and risk mitigation. Present as a numbered list.";
+                    }
                     await callGeminiAPI(prompt, pocTipsOutput, pocTipsButtonText, pocTipsLoadingSpinner, '✨ Get AI PoC Success Tips');
                 });
             }
 
             if (generateStoryButton) {
                 generateStoryButton.addEventListener('click', async () => {
-                    const softwareType = softwareTypeInput.value.trim();
-                    if (!softwareType) {
+                    const softwareTypeForStory = softwareTypeInput.value.trim(); // Use the correct input ID
+                    if (!softwareTypeForStory) {
                         storyOutput.textContent = "Please enter a software type or key feature to get storytelling ideas.";
                         storyOutput.classList.remove('content-hidden');
                         return;
                     }
-                    const prompt = `Generate 3 distinct and compelling storytelling hooks for a software demo about a '${softwareType}'. Each hook should be a short paragraph and should:
+                    const prompt = `Generate 3 distinct and compelling storytelling hooks for a software demo about a '${softwareTypeForStory}'. Each hook should be a short paragraph and should:
 1. Briefly set a relatable problem or challenge the target audience faces.
-2. Hint at how the '${softwareType}' provides a unique solution.
+2. Hint at how the '${softwareTypeForStory}' provides a unique solution.
 3. Suggest a 'wow' moment or key benefit that would capture attention.
 Present as a numbered list.`;
                     await callGeminiAPI(prompt, storyOutput, storyButtonText, storyLoadingSpinner, '✨ Generate Storytelling Angles');

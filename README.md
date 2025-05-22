@@ -1,6 +1,6 @@
 # Content Creation in the Age of AI & LLMs
 
-This project explores how Large Language Models (LLMs) and AI are transforming the creation of blogs, academic papers, and software demos. It provides interactive, web-based reports that synthesize best practices, ethical considerations, and future trends for content creators, researchers, and technologists.
+This project explores how Large Language Models (LLMs) and AI are transforming the creation of blogs, academic papers, and software demos. It provides interactive, web-based reports that synthesize best practices, ethical considerations, and future trends for content creators, researchers, and technologists. And ofcourse, this itself was generated using Gemini and OpenAI LLMs. 
 
 ## Project Overview
 
@@ -33,10 +33,3 @@ AI and LLMs are democratizing content creation but also raising the bar for orig
 - **Researchers:** Leverage LLMs for efficiency, but maintain rigorous standards and transparency.
 - **Demo Creators:** Harness AI for scale and engagement, but keep the human touch for trust and impact.
 - **All Stakeholders:** Build critical AI literacy and adapt to new norms in content, research, and demonstration.
-
-## How to Use
-- Open any HTML file in the `docs/` folder in your browser or deploy via GitHub Pages.
-- Navigate using the built-in menus to explore each report interactively.
-
----
-Content and insights are derived from the interactive reports in `docs/`. For details, see the source HTML files.
