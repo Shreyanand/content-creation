@@ -1,60 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Content Creation in the Age of AI & LLMs</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Creation in the Age of AI & LLMs</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
 </head>
 <body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
-  <header class="bg-white shadow-md py-6 mb-8">
-    <div class="container mx-auto px-4">
-      <p class="text-lg text-gray-600">This page renders the project README. For interactive reports, see the links below.</p>
-    </div>
-  </header>
-  <main class="container mx-auto px-4 flex-1 prose prose-lg max-w-none">
-    <div id="readme-content" class="mb-8"></div>
-    <div class="my-8 flex flex-wrap gap-4">
-      <a href="blogs.html" class="px-6 py-3 bg-teal-600 text-white rounded shadow hover:bg-teal-700 transition">Read the Blogging & Research Report</a>
-      <a href="demos.html" class="px-6 py-3 bg-teal-600 text-white rounded shadow hover:bg-teal-700 transition">Read the Software Demos Report</a>
-    </div>
-  </main>
-  <footer class="bg-white border-t border-gray-200 py-6 text-center text-sm text-gray-500">
-    &copy; 2025 Content Creation in the Age of AI & LLMs. <a href="README.md" class="text-teal-700 underline">View raw README</a>
-  </footer>
-  <script>
-    // Fetch and render README.md as HTML
-    fetch('README.md')
-      .then(response => response.text())
-      .then(md => {
-        // Use GitHub's API or a CDN for markdown parsing if available, else fallback to basic rendering
-        // For local preview, use a simple markdown-to-HTML converter
-        function escapeHtml(text) {
-          var map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
-          return text.replace(/[&<>"']/g, function(m) { return map[m]; });
-        }
-        // Basic markdown to HTML (headings, lists, bold, italics, code)
-        function basicMarkdown(md) {
-          return md
-            .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-            .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-            .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-            .replace(/^#### (.*$)/gim, '<h4>$1</h4>')
-            .replace(/\*\*([^*]+)\*\*/gim, '<strong>$1</strong>')
-            .replace(/^\* ([^\n]+)$/gim, '<li>$1</li>')
-            .replace(/^\- ([^\n]+)$/gim, '<li>$1</li>')
-            .replace(/\n\n/g, '<br><br>')
-            .replace(/`([^`]+)`/g, '<code>$1</code>')
-            .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" class="text-teal-700 underline">$1</a>')
-            .replace(/\n/g, '<br>');
-        }
-        // Try to use marked.js if available, else fallback
-        if (window.marked) {
-          document.getElementById('readme-content').innerHTML = window.marked.parse(md);
-        } else {
-          document.getElementById('readme-content').innerHTML = basicMarkdown(escapeHtml(md));
-        }
-      });
-  </script>
+    <header class="bg-white shadow-md py-6 mb-8">
+        <div class="container mx-auto px-4">
+            <h1 class="text-3xl font-bold text-teal-700 mb-2">Content Creation in the Age of AI & LLMs</h1>
+            <p class="text-lg text-gray-600">Explore how Large Language Models (LLMs) and AI are transforming blogs, academic papers, and software demos.</p>
+        </div>
+    </header>
+    <main class="container mx-auto px-4 flex-1">
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-teal-600 mb-4">Project Overview</h2>
+            <ul class="list-disc list-inside mb-4">
+                <li><strong>Interactive reports</strong> are in the <code>docs/</code> folder for easy publishing via GitHub Pages.</li>
+                <li><strong>Key Files:</strong> <a href="blogs.html" class="text-teal-700 underline">blogs.html</a> (LLMs in blogging & research), <a href="demos.html" class="text-teal-700 underline">demos.html</a> (software demo trends & AI impact).</li>
+            </ul>
+        </section>
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold text-teal-600 mb-2">What You'll Learn</h2>
+            <div class="mb-4">
+                <h3 class="text-lg font-bold text-gray-700 mb-1">Blogging & Research in the LLM Era</h3>
+                <ul class="list-disc list-inside ml-4 text-gray-700">
+                    <li>How LLMs like GPT-4, Claude, and Gemini are reshaping content creation, from blogs to academic papers.</li>
+                    <li>The dual nature of LLMs: efficiency and creativity vs. risks like bias, misinformation, and loss of originality.</li>
+                    <li>The enduring value of human authorship, critical thinking, and ethical responsibility.</li>
+                    <li>Practical toolkits for readers and researchers (AI content detectors, workflow impacts, publisher guidelines).</li>
+                    <li>The importance of AI literacy for all stakeholders: writers, researchers, publishers, developers, and educators.</li>
+                </ul>
+                <a href="blogs.html" class="inline-block mt-2 px-4 py-2 bg-teal-600 text-white rounded hover:bg-teal-700 transition">Read the Blogging & Research Report</a>
+            </div>
+            <div class="mb-4">
+                <h3 class="text-lg font-bold text-gray-700 mb-1">Software Demos & Proof of Concepts in the AI Age</h3>
+                <ul class="list-disc list-inside ml-4 text-gray-700">
+                    <li>The evolving art and science of software demonstration, including best practices for PoCs.</li>
+                    <li>How LLMs and generative AI are automating demo creation (scripts, voiceovers, avatars, interactive walkthroughs).</li>
+                    <li>Comparative analysis of demo tools: screen recorders, interactive platforms, automation suites.</li>
+                    <li>Case studies and recommendations for integrating AI into demo workflows while maintaining authenticity and ethical standards.</li>
+                    <li>Future trends: hyper-personalization, autonomous demo generation, and the new role of humans as AI orchestrators.</li>
+                </ul>
+                <a href="demos.html" class="inline-block mt-2 px-4 py-2 bg-teal-600 text-white rounded hover:bg-teal-700 transition">Read the Software Demos Report</a>
+            </div>
+        </section>
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold text-teal-600 mb-2">Why This Matters</h2>
+            <ul class="list-disc list-inside ml-4 text-gray-700">
+                <li><strong>Writers & Bloggers:</strong> Use AI as an assistant, not a replacement. Focus on unique human value.</li>
+                <li><strong>Researchers:</strong> Leverage LLMs for efficiency, but maintain rigorous standards and transparency.</li>
+                <li><strong>Demo Creators:</strong> Harness AI for scale and engagement, but keep the human touch for trust and impact.</li>
+                <li><strong>All Stakeholders:</strong> Build critical AI literacy and adapt to new norms in content, research, and demonstration.</li>
+            </ul>
+        </section>
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold text-teal-600 mb-2">How to Use</h2>
+            <ul class="list-disc list-inside ml-4 text-gray-700">
+                <li>Open any HTML file in the <code>docs/</code> folder in your browser or deploy via GitHub Pages.</li>
+                <li>Navigate using the built-in menus to explore each report interactively.</li>
+            </ul>
+        </section>
+    </main>
+    <footer class="bg-white border-t border-gray-200 py-6 text-center text-sm text-gray-500">
+        &copy; 2025 Content Creation in the Age of AI & LLMs. See <a href="https://github.com/your-repo" class="text-teal-700 underline">README</a> for details.
+    </footer>
 </body>
 </html>
